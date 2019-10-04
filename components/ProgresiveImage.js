@@ -1,7 +1,20 @@
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image,Animated } from 'react-native';
 
 export default class ProgresiveImage extends React.Component {
+  thumbnailAnimated = new Animated.Value(0);
+imageAnimated = new Animated.Value(0);
+handleThumbnailLoad = () => {
+  Animated.timing(this.thumbnailAnimated, {
+    toValue: 1,
+  }).start();
+}
+onImageLoad = () => {
+  Animated.timing(this.imageAnimated, {
+    toValue: 1,
+  }).start();
+}
+
   render() {
     const {
       thumbnailSource,
@@ -11,15 +24,18 @@ export default class ProgresiveImage extends React.Component {
     } = this.props;
     return (
       <View style={styles.container}>
-        <Image
+        <Animated.Image
           {...props}
           source={thumbnailSource}
-          style={style}
+          style={[style, { opacity: this.thumbnailAnimated }]}
+          onLoad={this.handleThumbnailLoad}
+          blurRadius={1}
         />
-        <Image
+        <Animated.Image
           {...props}
           source={source}
-          style={[styles.imageOverlay, style]}
+          style={[styles.imageOverlay, { opacity: this.imageAnimated }, style]}
+          onLoad={this.onImageLoad}
         />
       </View>
     );
