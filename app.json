@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "winwin",
+    "scheme": "winwin",
+    "slug": "winwin",
+    "privacy": "public",
+    "sdkVersion": "35.0.0",
+    "platforms": ["ios", "android", "web"],
+    "version": "2.0.1",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.egy.winwin",
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "This app uses your current location to find nearby offers for you."
+      }
+    },
+    "android": {
+      "package": "com.egy.winwin",
+      "versionCode": 33
+    },
+
+    "description": "this app for offers"
+  }
+}
