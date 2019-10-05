@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
     textTransform: "capitalize",
     fontSize: 16,
     fontWeight: "bold",
-    color: colors.white
+    color: colors.white,
+    textAlign: 'center'
   },
   column: {
     flexDirection: "column",
@@ -78,8 +79,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "transparent",
-    borderWidth: 1,
-    borderColor: colors.primary,
+    // borderWidth: 1,
+    // borderColor: colors.primary,
     paddingVertical: 5,
     marginVertical: 20,
     borderRadius: 10
@@ -144,7 +145,8 @@ const styles = StyleSheet.create({
   sectionSpeakerText: {
     color: "white",
     fontSize: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: 'center'
   },
   sectionTitleText: {
     color: "white",

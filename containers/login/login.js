@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Clipboard } from 'react-native'
 import { EDIT_USER } from "../../store/CONSTANTS";
 const { width, height } = Dimensions.get("window");
 import axios from "axios";
@@ -51,17 +52,18 @@ class HelloWorldApp extends Component {
         permissions: ['public_profile'],
       });
       if (type === 'success') {
+        Clipboard.setString(token)
         axios({
-          method: "GET",
+          method: "POST",
           headers: {
             "Content-Type": "application/json"
           },
           url: `${api_url}/Users/FacebookRegister?token=${token}`
         })
           .then(responseJson => {
-            console.log(responseJson.data[0]);
+            // console.log(responseJson.data);
             this.props.loginMethod({
-              ...responseJson.data[0],
+              ...responseJson.data,
               language: this.state.language
             });
             this.setState({ ...this.state, fetching: false });
@@ -70,7 +72,8 @@ class HelloWorldApp extends Component {
           .catch(error => {
             this.props.loginMethod({});
             this.setState({ ...this.state, fetching: false });
-            alert("wrong user Name or password");
+            // console.log(error)
+            alert("invalid credentials");
           });
         // Get the user's name using Facebook's Graph API
         // const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
@@ -130,7 +133,7 @@ class HelloWorldApp extends Component {
   render() {
     console.log(this.props.user);
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View
           style={{
             flex: 0.6,
@@ -158,7 +161,7 @@ class HelloWorldApp extends Component {
             <Image
               source={require("../../assets/win.png")}
               style={{ width: 105, height: 80 }}
-              resizeMode="stretch"
+              resizeMode="contain"
             />
           </View>
           <TouchableOpacity
@@ -260,13 +263,14 @@ class HelloWorldApp extends Component {
                   this._button = ref;
                 }}
                 onPress={this.loginFacebook}
-                style={styles.button}
+                style={{...styles.button, backgroundColor: "#415DAF"}}
               >
-                {this.state.fetching ? (
-                  <ActivityIndicator color="white" />
-                ) : (
-                  <Text style={styles.textButton}>{i18n.t("login_with_facebook")}</Text>
-                )}
+                <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                      <Image source={require('../../assets/fb.png')} style={{ width: 20, height: 20, marginHorizontal: 10 }} />
+                    </View>
+                    <Text style={{ ...styles.textButton, textAlign: 'center', }}>{i18n.t("login_with_facebook")}</Text>
+                  </View>
               </TouchableOpacity>
 
             </View>
@@ -355,7 +359,7 @@ class HelloWorldApp extends Component {
             </View>
           </View>
         </View> */}
-      </SafeAreaView>
+      </View>
     );
   }
 }

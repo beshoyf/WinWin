@@ -107,7 +107,7 @@ class HelloWorldApp extends Component {
             <Image
               source={require("../../assets/win.png")}
               style={{ width: 105, height: 80 }}
-              resizeMode="stretch"
+              resizeMode="contain"
             />
           </View>
         </View>

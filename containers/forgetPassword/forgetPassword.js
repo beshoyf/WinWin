@@ -51,12 +51,12 @@ export default class HelloWorldApp extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
         <View
           style={{
             flex: 0.6,
             backgroundColor: "#2e6cff",
-            borderBottomLeftRadius: 100
+            borderBottomLeftRadius: 100,
           }}
         >
           <TouchableOpacity
@@ -78,7 +78,7 @@ export default class HelloWorldApp extends Component {
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
               left: 10,
-              top: 10,
+              top: 60,
               elevation: 5
             }}
           >
@@ -100,7 +100,7 @@ export default class HelloWorldApp extends Component {
             <Image
               source={require("../../assets/win.png")}
               style={{ width: 105, height: 80 }}
-              resizeMode="stretch"
+              resizeMode="contain"
             />
           </View>
         </View>
@@ -141,7 +141,7 @@ export default class HelloWorldApp extends Component {
             <Text style={styles.textButton}>{i18n.t("resetPassword")}</Text>
           )}
         </TouchableOpacity> */}
-      </SafeAreaView>
+      </View>
     );
   }
 }

@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
   Text,
+  Linking,
   View
 } from "react-native";
 const { width, height } = Dimensions.get("window");
@@ -15,7 +16,7 @@ const { width, height } = Dimensions.get("window");
 import colors from "../../constants/colors";
 import styles from "./styles";
 import Back from "../../components/back";
-import { AntDesign, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
+import { AntDesign, Ionicons, SimpleLineIcons, MaterialCommunityIcons, Octicons, Entypo } from "@expo/vector-icons";
 import i18n from "../../utils/language";
 import Server from "../../constants/server";
 import Constants from "expo-constants";
@@ -180,12 +181,14 @@ class HelloWorldApp extends Component {
     return (
       <ParallaxScrollView
         onScroll={onScroll}
-        headerBackgroundColor="#fff"
+        headerBackgroundColor="#F2F2F2"
+      contentBackgroundColor="#F2F2F2"
+        style={{ backgroundColor: 'red' }}
         stickyHeaderHeight={STICKY_HEADER_HEIGHT}
         parallaxHeaderHeight={PARALLAX_HEADER_HEIGHT}
         backgroundSpeed={10}
         renderContentBackground={() => (
-          <View style={{}}>
+          <View style={{ backgroundColor: '#F2F2F2' }}>
             <View style={{ marginHorizontal: 20 }}>
               <View
                 style={{
@@ -199,11 +202,14 @@ class HelloWorldApp extends Component {
               >
                 <View
                   style={{
-                    flex: 1.7,
-                    backgroundColor: colors.orange,
+                    flex: .5,
+                    borderRadius: 10,
+                    backgroundColor: "#F68E1E",
                     padding: 10,
+                    paddingVertical: 15,
                     alignItems: "center",
-                    justifyContent: "center"
+                    justifyContent: "center",
+
                   }}
                 >
                   <Text style={styles.title}>
@@ -218,30 +224,26 @@ class HelloWorldApp extends Component {
                   style={{
                     flexDirection: "row",
                     flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center"
+                    justifyContent: 'flex-end'
                   }}
                 >
-                  <SimpleLineIcons
+                  <MaterialCommunityIcons
                     onPress={this.openDirection}
-                    name="location-pin"
-                    size={Platform.OS === "ios" ? 23 : 23}
-                    color={colors.primary}
+                    name="directions"
+                    size={38}
+                    color={"#b0b0b0"}
                     style={{
                       paddingHorizontal: 10,
                       paddingLeft: 20,
-                      paddingVertical: 10
+                      paddingVertical: 10,
                     }}
                   />
-                  <Ionicons
+                  <MaterialCommunityIcons
                     onPress={this.toggleFavorite}
-                    name={
-                      this.state.isFavorite ? "ios-heart" : "ios-heart-empty"
-                    }
-                    size={25}
+                    name={this.state.isFavorite ? "heart-circle" : "heart-circle-outline"}
+                    size={38}
                     color={this.state.isFavorite ? "red" : colors.primary}
                     style={{
-                      flex: 1,
                       paddingHorizontal: 10,
                       paddingVertical: 10
                     }}
@@ -265,25 +267,30 @@ class HelloWorldApp extends Component {
                 }}
               >
                 <View style={styles.counter}>
-                  <AntDesign
-                    onPress={() => this.increase()}
-                    name="plus"
-                    size={22}
-                    style={{ padding: 5 }}
-                    color={colors.primary}
-                  />
-                  <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
-                    <Text>{this.state.count}</Text>
-                    <Text>/</Text>
-                    <Text>{this.state.offer.useLimit}</Text>
+                    <View style={{ backgroundColor: '#F7B0B1', width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                    <Entypo
+                      onPress={() => this.decrease()}
+                      name="minus"
+                      size={22}
+                      color="#FFF"
+                      style={{ padding: 5 }}
+                    />
                   </View>
-                  <AntDesign
-                    onPress={() => this.decrease()}
-                    name="minus"
-                    size={22}
-                    color={colors.primary}
-                    style={{ padding: 5 }}
-                  />
+
+                  <View style={{ flexDirection: "row", marginHorizontal: 15, backgroundColor: '#b0b0b0', borderRadius: 5 }}>
+                    <Text style={{ color: '#FFF', fontWeight: 'bold', paddingVertical: 10, paddingHorizontal: 20 }}>{`${this.state.count} / ${this.state.offer.useLimit}`}</Text>
+                  </View>
+
+                  <View style={{ backgroundColor: '#F7B0B1', width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                    <Octicons
+                      onPress={() => this.increase()}
+                      name="plus"
+                      size={22}
+                      style={{ padding: 5 }}
+                      color="#FFF"
+                      />
+                    </View>
+
                 </View>
               </View>
             </View>
@@ -295,7 +302,7 @@ class HelloWorldApp extends Component {
               borderRadius={10}
               style={{ alignSelf: "center" }}
               onPress={next => {
-                /** Do Something **/
+                this.offer()
                 next();
               }}
             >
@@ -333,7 +340,7 @@ class HelloWorldApp extends Component {
         )}
         renderForeground={() => (
           <View key="parallax-header" style={styles.parallaxHeader}>
-            <Text style={styles.sectionSpeakerText}>
+            <Text style={{...styles.sectionSpeakerText }}>
               {this.props.user.language == "en"
                 ? this.state.offer.brandName
                 : this.state.offer.brandAName == null
@@ -344,12 +351,14 @@ class HelloWorldApp extends Component {
         )}
         renderStickyHeader={() => (
           <View key="sticky-header" style={styles.stickySection}>
-            <Text style={styles.stickySectionText}>
-              {this.props.user.language == "en"
-                ? this.state.offer.brandName
-                : this.state.offer.brandAName == null
-                ? this.state.offer.brandName
-                : this.state.offer.brandAName}
+            <Text style={{...styles.stickySectionText}}>
+              {
+                this.state.offer.brandName ?
+                  this.state.offer.brandAName.length > 15 ?
+                    `${this.state.offer.brandName.substring(0, 15)}...`
+                  : this.state.offer.brandName
+                : null
+              }
             </Text>
           </View>
         )}

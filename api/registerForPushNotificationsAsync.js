@@ -1,5 +1,5 @@
 import {   Notifications } from 'expo';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, Clipboard, Alert } from 'react-native';
 import * as Permissions from 'expo-permissions';
 
 export default (async function RegisterForPushNotificationsAsync() {
@@ -21,5 +21,7 @@ export default (async function RegisterForPushNotificationsAsync() {
 	let token = await Notifications.getExpoPushTokenAsync();
 
 	AsyncStorage.setItem('token', token);
-	console.log(token);
+	// console.log(token);
+	// Clipboard.setString(token);
+	// Alert.alert("copied to your clipboard", token)
 });

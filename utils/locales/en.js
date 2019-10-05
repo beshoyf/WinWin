@@ -72,5 +72,5 @@ export default {
   more: "More",
   enterSerial: "enter your serial number",
   create: "Create",
-  login_with_facebook:"Login With Facebook"
+  login_with_facebook:"Continue with Facebook"
 };

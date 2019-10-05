@@ -11,6 +11,7 @@ import {
   ImageBackground,
   Button,
   Slider,
+  Animated,
   Share,
   AsyncStorage
 } from "react-native";
@@ -19,14 +20,12 @@ import Rates from "../Rates/rates";
 import Card from "../../components/card";
 
 import colors from "../../constants/colors";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, Feather, MaterialIcons } from "@expo/vector-icons";
 import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
-import Animated, { Easing } from "react-native-reanimated";
 import i18n from "../../utils/language";
 import Server from "../../constants/server";
 const { api_url } = Server;
 
-const { Value, timing } = Animated;
 import axios from "axios";
 import Constants from "expo-constants";
 const { width, height } = Dimensions.get("window");
@@ -45,6 +44,7 @@ class HelloWorldApp extends Component {
       refresh: false,
       issearch: false,
       isActive: false,
+      paddingVerticalAnim: new Animated.Value(40),
       i: require("../../assets/win.png"),
       categories: [
         {
@@ -94,6 +94,15 @@ class HelloWorldApp extends Component {
     };
   }
   componentDidMount() {
+    // Animated.timing(
+    //   this.state.paddingVerticalAnim, 
+    //   {
+    //     toValue: 10,
+    //     duration: 3000,
+    //     useNativeDriver: false
+    //   },
+    // ).start();
+
     console.log(this.props.user.language);
     i18n.locale = this.props.user.language;
 
@@ -271,6 +280,7 @@ class HelloWorldApp extends Component {
 
   category = item => (
     <TouchableOpacity
+      style={{  }}
       onPress={() =>
         this.props.navigation.navigate("Categories", {
           catId: item.id,
@@ -278,10 +288,19 @@ class HelloWorldApp extends Component {
         })
       }
     >
-      <ImageBackground source={item.img} style={styles.category}>
+      <ImageBackground source={item.img} style={{
+        alignItems: "center",
+        justifyContent: "center",
+        margin: 5,
+        paddingHorizontal: 20,
+        paddingVertical: 40,
+        overflow: "hidden",
+        borderRadius: 10,
+
+      }}>
         <View style={styles.overlay} />
         <View style={styles.categoryIcon}>
-          <Text style={styles.categoryTxt}>{i18n.t(item.title)}</Text>
+          <Animated.Text style={{...styles.categoryTxt}}>{i18n.t(item.title)}</Animated.Text>
         </View>
       </ImageBackground>
     </TouchableOpacity>
@@ -327,6 +346,9 @@ class HelloWorldApp extends Component {
   onRefresh() {
     this.setState({ isLoading: true }, this.fetchOffers());
   }
+  handleScroll = (e) => {
+    console.log(e.nativeEvent.contentOffset.y);
+  }
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -335,17 +357,17 @@ class HelloWorldApp extends Component {
             <Text style={styles.textHeader}>Winwin</Text>
           </View>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Ionicons
+            <Feather
               onPress={this.search}
-              name="ios-search"
-              size={Platform.OS === "ios" ? 30 : 25}
+              name="search"
+              size={Platform.OS === "ios" ? 25 : 25}
               color={colors.black}
               style={styles.iconStyle}
             />
-            <Ionicons
+            <MaterialIcons
               onPress={() => this.props.navigation.navigate("Notifications")}
-              name="ios-notifications-outline"
-              size={Platform.OS === "ios" ? 30 : 25}
+              name="notifications"
+              size={Platform.OS === "ios" ? 25 : 25}
               color={colors.black}
               style={[
                 styles.iconStyle,
@@ -354,7 +376,7 @@ class HelloWorldApp extends Component {
             />
           </View>
         </View>
-        <View>
+        <View style={{  }}>
           <Text style={styles.text}>Category</Text>
           <FlatList
             showsHorizontalScrollIndicator={false}
@@ -399,6 +421,8 @@ class HelloWorldApp extends Component {
               ListFooterComponent={() => <View style={{ height: 240 }} />}
               onRefresh={() => this.onRefresh()}
               refreshing={this.state.isLoading}
+              // onScroll={this.handleScroll}
+
 
               //onEndReached={() => this.newOffer()}
               ListEmptyComponent={

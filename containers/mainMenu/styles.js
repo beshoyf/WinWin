@@ -16,7 +16,17 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "space-between",
     alignItems: "center",
-    borderBottomWidth: 0.3
+    borderBottomWidth: 0.3,
+    borderBottomColor: '#CCC',
+    shadowColor: "#000",
+shadowOffset: {
+	width: 0,
+	height: 1,
+},
+shadowOpacity: 0.22,
+shadowRadius: 2.22,
+
+elevation: 3,
   },
   textHeader: {
     fontSize: 22,
@@ -50,9 +60,6 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     overflow: "hidden",
     borderRadius: 10
-
-    // paddingHorizontal: 5, alignItems: 'center', width: 114, marginVertical: 8,
-    // borderRightWidth: 1, bottom: 0, height: height * .09
   },
   text: {
     marginHorizontal: 15,
