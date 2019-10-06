@@ -34,7 +34,7 @@ export default class ButtonComponent extends Component {
 
     let textRef = React.createRef();
     let menuRef = null;
-   
+
     const setMenuRef = ref => menuRef = ref;
     const hideMenu = () => menuRef.hide();
     const onShareOffer = () => {
@@ -99,7 +99,7 @@ export default class ButtonComponent extends Component {
                   />
 
               </TouchableOpacity>
- 
+
       <Menu
         ref={setMenuRef}
       >
@@ -156,7 +156,7 @@ export default class ButtonComponent extends Component {
 
 
             </View>
-                          
+
             <View style={{ flex: .2, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
               <TouchableOpacity
                 onPress={pressHeart}

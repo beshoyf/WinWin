@@ -5,7 +5,8 @@ import {
   FlatList,
   ActivityIndicator,
   Image,
-  Dimensions
+  Dimensions,
+  Share
 } from "react-native";
 const { width, height } = Dimensions.get("window");
 import styles from "./styles";
@@ -32,40 +33,52 @@ class HelloWorldApp extends Component {
         flex: 1
       }}
     >
-      <Card
-        pressHeart={() => this.toggleFavorite(item)}
-        brandName={
-          this.props.user.language == "en"
-            ? item.brandName
-            : item.brandAName == null
-            ? item.brandName
-            : item.brandAName
-        }
-        category={item.categoryName}
-        urlImageSmall={item.brandIcon}
-        urlImageLarg={item.image}
-        title={
-          this.props.user.language == "en"
-            ? item.title
-            : item.aTitle == null
-            ? item.title
-            : item.aTitle
-        }
-        onPress={() =>
-          this.props.navigation.navigate("Brand", { brandId: item.brandId })
-        }
-        onPressOffer={() =>
-          this.props.navigation.navigate("Offer", {
-            offerId: item.offerId,
-            categoryName: item.categoryName,
-            brandName: item.brandName
-          })
-        }
-        isfav={item.isFavorite}
-        isheart={true}
-      />
+    <Card
+      onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
+      pressHeart={() => this.toggleFavorite(item)}
+      brandName={
+        this.props.user.language == "en"
+          ? item.brandName
+          : item.brandAName == null
+          ? item.brandName
+          : item.brandAName
+      }
+      category={item.categoryName}
+      urlImageSmall={item.brandIcon}
+      urlImageLarg={item.image}
+      title={
+        this.props.user.language == "en"
+          ? item.title
+          : item.aTitle == null
+          ? item.title
+          : item.aTitle
+      }
+      onPress={() =>
+        this.props.navigation.navigate("Brand", { brandId: item.brandId })
+      }
+      onPressOffer={() =>
+        this.props.navigation.navigate("Offer", {
+          offerId: item.offerId,
+          categoryName: item.categoryName,
+          brandName: item.brandName
+        })
+      }
+      isfav={item.isFavorite}
+    />
+
     </View>
   );
+
+  onShare =  (message) => {
+
+     Share.share({
+        message,
+        url:message
+      });
+
+
+  };
+
   toggleFavorite = item => {
     var id = item.offerId;
     fetch(

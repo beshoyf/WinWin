@@ -28,6 +28,8 @@ import Brand from "../containers/brand/brand";
 import Offer from "../containers/offer/offer";
 import Branch from "../containers/branch/branch";
 import Order from "../containers/order/order";
+import Contact from "../containers/ContactUs";
+
 import Basket from "../containers/basket/basket";
 import Images from "../containers/images";
 import favourite from "../containers/favourite/favourite";
@@ -73,6 +75,7 @@ const TabNavigator = createBottomTabNavigator(
         )
       }
     },
+
 
     Setting: {
       screen: Setting,
@@ -137,6 +140,10 @@ const appStack1 = createStackNavigator(
     Brand: { screen: Brand, navigationOptions: { header: null } },
     Offer: { screen: Offer, navigationOptions: { header: null }, path: "offer/:offerId/:categoryName/:brandName" },
     Branch: { screen: Branch, navigationOptions: { header: null } },
+    Contact: {
+      screen: Contact,
+      navigationOptions: { header: null }
+    },
     Order: { screen: Order, navigationOptions: { header: null } },
     Basket: { screen: Basket, navigationOptions: { header: null } },
     QrActivate: { screen: QrActivate, navigationOptions: { header: null } },
@@ -152,6 +159,10 @@ const appStack2 = createStackNavigator(
     Login: { screen: Login, navigationOptions: { header: null } },
     ForgetPassword: {
       screen: ForgetPassword,
+      navigationOptions: { header: null }
+    },
+    Contact: {
+      screen: Contact,
       navigationOptions: { header: null }
     },
     Registration: { screen: Registration, navigationOptions: { header: null } },

@@ -185,6 +185,80 @@ class HelloWorldApp extends Component {
               </View>
               <Ionicons name="ios-arrow-forward" size={20} color="grey" />
             </TouchableOpacity>
+
+
+            <TouchableOpacity
+              onPress={() => Linking.openURL("https://winwin-eg.com/privacy")}
+              style={[
+                styles.smallCard,
+                {
+                  paddingHorizontal: 0,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderBottomWidth: 0.3
+                }
+              ]}
+            >
+              <View style={{ alignItems: "center", flexDirection: "row" }}>
+                <MaterialCommunityIcons
+                  name='security'
+                  size={30}
+                  color="grey"
+                  style={[styles.imageCard, { right: 2 }]}
+                />
+                <Text
+                  style={[
+                    styles.headText,
+                    { marginLeft: 10, color: colors.primary }
+                  ]}
+                >
+                  {i18n.t("privacy")}
+                </Text>
+              </View>
+              <Ionicons name="ios-arrow-forward" size={20} color="grey" />
+            </TouchableOpacity>
+
+
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Contact')}
+              style={[
+                styles.smallCard,
+                {
+                  paddingHorizontal: 0,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  borderBottomWidth: 0.3
+                }
+              ]}
+            >
+              <View style={{ alignItems: "center", flexDirection: "row" }}>
+                <Ionicons
+                  name={
+                    Platform.OS === "ios"
+                      ? "ios-contact"
+                      : "md-contact"
+                  }
+                  size={30}
+                  color="grey"
+                  style={[styles.imageCard, { right: 2 }]}
+                />
+                <Text
+                  style={[
+                    styles.headText,
+                    { marginLeft: 10, color: colors.primary }
+                  ]}
+                >
+                  {i18n.t("contact")}
+                </Text>
+              </View>
+              <Ionicons name="ios-arrow-forward" size={20} color="grey" />
+            </TouchableOpacity>
+
+
+
+
             <Text style={[styles.subHeadText, { marginTop: 20 }]}>
               {i18n.t("more")}
             </Text>

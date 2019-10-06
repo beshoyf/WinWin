@@ -8,7 +8,8 @@ import {
   ActivityIndicator,
   Platform,
   TextInput,
-  SafeAreaView
+  SafeAreaView,
+  Share
 } from "react-native";
 import styles from "./styles";
 import Back from "../../components/back";
@@ -37,6 +38,45 @@ class HelloWorldApp extends Component {
     // this.setState({ id: itemId });
     this._inpute && this._inpute.focus();
   }
+  onShare =  (message) => {
+
+     Share.share({
+        message,
+        url:message
+      });
+
+
+  };
+  toggleFavorite = item => {
+    var id = item.offerId;
+    fetch(
+      `${api_url}/UserFavourites/${
+        item.isFavorite ? "RemoveFavourite" : "Add"
+      }?userid=${this.props.user.userId}&offerid=${id}`,
+      {
+        method: `${item.isFavorite ? "DELETE" : "POST"}`,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(responseJson => {
+        var orderSatus = this.state.orderSatus;
+        orderSatus.map(post => {
+          if (post.offerId == id) {
+            post.isFavorite = !post.isFavorite;
+          }
+        });
+        this.setState({ orderSatus });
+        if (responseJson.status == 200) {
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
+  };
+
   componentDidMount() {
     this._inpute && this._inpute.focus();
   }
@@ -76,23 +116,38 @@ class HelloWorldApp extends Component {
         flex: 1
       }}
     >
-      <Card
-        brandName={item.brandName}
-        category={item.categoryName}
-        urlImageSmall={item.brandIcon}
-        urlImageLarg={item.image}
-        title={item.title}
-        onPress={() =>
-          this.props.navigation.navigate("Brand", { brandId: item.brandId })
-        }
-        onPressOffer={() =>
-          this.props.navigation.navigate("Offer", {
-            offerId: item.offerId,
-            categoryName: item.categoryName,
-            brandName: item.brandName
-          })
-        }
-      />
+    <Card
+      onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
+      pressHeart={() => this.toggleFavorite(item)}
+      brandName={
+        this.props.user.language == "en"
+          ? item.brandName
+          : item.brandAName == null
+          ? item.brandName
+          : item.brandAName
+      }
+      category={item.categoryName}
+      urlImageSmall={item.brandIcon}
+      urlImageLarg={item.image}
+      title={
+        this.props.user.language == "en"
+          ? item.title
+          : item.aTitle == null
+          ? item.title
+          : item.aTitle
+      }
+      onPress={() =>
+        this.props.navigation.navigate("Brand", { brandId: item.brandId })
+      }
+      onPressOffer={() =>
+        this.props.navigation.navigate("Offer", {
+          offerId: item.offerId,
+          categoryName: item.categoryName,
+          brandName: item.brandName
+        })
+      }
+      isfav={item.isFavorite}
+    />
     </View>
   );
 
@@ -131,32 +186,8 @@ class HelloWorldApp extends Component {
             keyExtractor={item => item.offerId.toString()}
             renderItem={({ item }) => this.renderOrderSatatus(item)}
             ListEmptyComponent={
-              <View>
-                <Card
-                  brandName={"winwin"}
-                  category={"winwin"}
-                  title={"winwin"}
-                />
-                <Card
-                  brandName={"winwin"}
-                  category={"winwin"}
-                  title={"winwin"}
-                />
-                <Card
-                  brandName={"winwin"}
-                  category={"winwin"}
-                  title={"winwin"}
-                />
-                <Card
-                  brandName={"winwin"}
-                  category={"winwin"}
-                  title={"winwin"}
-                />
-                <Card
-                  brandName={"winwin"}
-                  category={"winwin"}
-                  title={"winwin"}
-                />
+              <View style={{justifyContent:'center',alignItems:'center'}}>
+              <Text style={{textAlign:'center',marginTop:'50%',fontSize:20}}>{i18n.t('search')}</Text>
               </View>
             }
           />

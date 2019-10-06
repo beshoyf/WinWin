@@ -72,5 +72,12 @@ export default {
   more: "More",
   enterSerial: "enter your serial number",
   create: "Create",
-  login_with_facebook:"Continue with Facebook"
+  login_with_facebook:"Continue with Facebook",
+  privacy:"privacy and policy",
+  aboutus:"About Us",
+  aboutdata:"Win-Win is a Marketing agency based On Technology. Our Idea is based mainly on the win-win situation model, between the customers and the brands and attract new customer to brands and Make a connection between them using a highly intelligent system. We offer our services for a year for several categories like (Café & Restaurants – Fashion – Entertainments – Beauty&Health – Special services – Medical ). Win-Win will help you save more than 30000 EGP. Win-Win App provides you with services in Cairo & Alexandria, in addition to large package of hotels in Sharm El-Sheikh & Hurghada",
+  search:"search appear here ..",
+  contact:"Contact Us",
+  submit:"submit"
+
 };

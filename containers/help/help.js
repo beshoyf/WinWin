@@ -53,6 +53,16 @@ export default class HelloWorldApp extends Component {
               <Text style={styles.handleRightLeft}>{i18n.t("steps7")}</Text>
             </CollapseBody>
           </Collapse>
+          <Collapse>
+            <CollapseHeader style={{ height: 40 }}>
+              <Separator bordered style={styles.headbg}>
+                <Text>{i18n.t("aboutus")}</Text>
+              </Separator>
+            </CollapseHeader>
+            <CollapseBody style={{ paddingTop: 8 }}>
+              <Text style={styles.handleRightLeft}>{i18n.t("aboutdata")}</Text>
+            </CollapseBody>
+          </Collapse>
         </ScrollView>
       </SafeAreaView>
     );
