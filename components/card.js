@@ -116,7 +116,7 @@ export default class ButtonComponent extends Component {
             <ProgresiveImage
             thumbnailSource={{ uri: urlImageSmall }}
               source={{ uri: urlImageLarg }}
-              style={{ height: 150, width: "100%" }}
+              style={{ height: 200, width: "100%" }}
             />
           )}
 
@@ -147,7 +147,8 @@ export default class ButtonComponent extends Component {
                     style={{
                       fontWeight: "bold",
                       fontSize: 13,
-                      elevation: 5
+                      elevation: 5,
+                      textAlign:'center'
                     }}
                   >
                     {brandName}

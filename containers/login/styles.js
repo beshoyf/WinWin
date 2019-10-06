@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   textforget: {
     textDecorationLine: "underline",
-    textAlign: "right",
+    textAlign: "center",
     marginHorizontal: width * 0.1,
     color: Colors.Grey
   },

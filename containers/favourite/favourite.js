@@ -13,6 +13,8 @@ import styles from "./styles";
 import Card from "../../components/card";
 import Server from "../../constants/server";
 //import Constants from 'expo-constants';
+import colors from "../../constants/colors";
+
 import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 const { api_url } = Server;
 import { connect } from "react-redux";
@@ -145,6 +147,9 @@ class HelloWorldApp extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style={[styles.setting, { color: colors.primary,padding:5 }]}>
+          Favourite
+        </Text>
         {this.state.isLoading == true ? (
           <View>
           <ShimmerPlaceHolder

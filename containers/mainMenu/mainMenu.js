@@ -95,7 +95,7 @@ class HelloWorldApp extends Component {
   }
   componentDidMount() {
     // Animated.timing(
-    //   this.state.paddingVerticalAnim, 
+    //   this.state.paddingVerticalAnim,
     //   {
     //     toValue: 10,
     //     duration: 3000,

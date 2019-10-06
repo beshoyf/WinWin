@@ -87,19 +87,17 @@ class HelloWorldApp extends Component {
   }
   submit = () => {
     this.setState({ isLoading: true });
-    fetch(
-      `${api_url}/api/Home/ContactUs?name=${this.state.userName}&mail=${this.state.emil}&question=${this.state.message}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(response => response.json())
+
+    axios({
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: `http://newapi.winwin-eg.com/api/Home/ContactUs?name=${this.state.userName}&mail=${this.state.email}&question=${this.state.message}`
+    })
       .then(responseJson => {
-        this.setState({ isloading: false });
+        // this.setState({ isloading: false });
+        // alert(JSON.stringify(responseJson))
         this.props.navigation.navigate("MainMenu");
       })
       .catch(error => {
@@ -137,7 +135,7 @@ class HelloWorldApp extends Component {
       <SafeAreaView style={styles.container}>
         <Back
           onPress={() => this.props.navigation.goBack()}
-          title="Contact"
+          title="Contact Us"
           styles={{
             marginBottom: 0,
             borderBottomWidth: 0,

@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import styles from "./styles";
 const { width, height } = Dimensions.get("window");
-import { Ionicons, Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Ionicons, Entypo, MaterialCommunityIcons,FontAwesome } from "@expo/vector-icons";
 import Back from "../../components/back";
 import i18n from "../../utils/language";
 import colors from "../../constants/colors";
@@ -205,7 +205,7 @@ class HelloWorldApp extends Component {
                   name='security'
                   size={30}
                   color="grey"
-                  style={[styles.imageCard, { right: 2 }]}
+                  style={[styles.imageCard, { right: 4 }]}
                 />
                 <Text
                   style={[
@@ -234,15 +234,13 @@ class HelloWorldApp extends Component {
               ]}
             >
               <View style={{ alignItems: "center", flexDirection: "row" }}>
-                <Ionicons
+                <FontAwesome
                   name={
-                    Platform.OS === "ios"
-                      ? "ios-contact"
-                      : "md-contact"
+                    'envelope-open-o'
                   }
                   size={30}
                   color="grey"
-                  style={[styles.imageCard, { right: 2 }]}
+                  style={[styles.imageCard, { right: 3 }]}
                 />
                 <Text
                   style={[

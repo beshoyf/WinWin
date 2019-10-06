@@ -20,6 +20,7 @@ import i18n from "../../utils/language";
 import { connect } from "react-redux";
 import { logIn } from "../../store/actions/user";
 import * as Facebook from 'expo-facebook';
+import { Ionicons, MaterialIcons,Entypo } from "@expo/vector-icons";
 
 const { api_url } = Server;
 class HelloWorldApp extends Component {
@@ -160,7 +161,7 @@ class HelloWorldApp extends Component {
           >
             <Image
               source={require("../../assets/win.png")}
-              style={{ width: 105, height: 80 }}
+              style={{ width: 150, height: 150 }}
               resizeMode="contain"
             />
           </View>
@@ -267,7 +268,7 @@ class HelloWorldApp extends Component {
               >
                 <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                      <Image source={require('../../assets/fb.png')} style={{ width: 20, height: 20, marginHorizontal: 10 }} />
+                      <Entypo name="facebook-with-circle" style={{ paddingHorizontal:5,color:'white',fontSize:23}} />
                     </View>
                     <Text style={{ ...styles.textButton, textAlign: 'center', }}>{i18n.t("login_with_facebook")}</Text>
                   </View>
