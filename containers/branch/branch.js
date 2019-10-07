@@ -62,6 +62,35 @@ export default class HelloWorldApp extends Component {
         alert("try again");
       });
   };
+  toggleFavorite = item => {
+    var id = item.offerId;
+    fetch(
+      `${api_url}/UserFavourites/${
+        item.isFavorite ? "RemoveFavourite" : "Add"
+      }?userid=${this.props.user.userId}&offerid=${id}`,
+      {
+        method: `${item.isFavorite ? "DELETE" : "POST"}`,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(responseJson => {
+        var orderSatus = this.state.orderSatus;
+        orderSatus.map(post => {
+          if (post.offerId == id) {
+            post.isFavorite = !post.isFavorite;
+          }
+        });
+        this.setState({ orderSatus });
+        if (responseJson.status == 200) {
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
+  };
   renderOrderSatatus = item => (
     <View
       style={{
@@ -71,6 +100,9 @@ export default class HelloWorldApp extends Component {
       }}
     >
       <Card
+      onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
+      pressHeart={() => this.toggleFavorite(item)}
+
         brandName={item.brandName}
         category={item.categoryName}
         urlImageSmall={item.brandIcon}

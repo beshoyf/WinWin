@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   Text,
   Linking,
-  View
+  View,
+  Alert
 } from "react-native";
 const { width, height } = Dimensions.get("window");
 
@@ -126,7 +127,26 @@ class HelloWorldApp extends Component {
               btnLoad: false
             });
             if (err.response.status === 400) {
-              alert(err.response.data.detail);
+              if(err.response.data.detail == "You cannot make an order you have unfinished one."){
+                Alert.alert(
+  ' WARNING',
+  'You already have un finished order',
+  [
+    {text: 'go to order', onPress: () => this.props.navigation.navigate("Order",{order:1})},
+    {
+      text: 'Cancel',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel',
+    }
+  ],
+  {cancelable: false},
+);
+
+              }
+              else {
+                alert(err.response.data.detail);
+
+              }
             } else {
               alert("try again");
             }

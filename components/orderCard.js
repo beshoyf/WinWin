@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { View, Image, Text, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/colors";
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+import { GestureHandler } from 'expo';
+import Swipeout from 'react-native-swipeout';
+
 const { width, height } = Dimensions.get("window");
 import {
   Collapse,
@@ -16,6 +20,14 @@ export default class HelloWorldApp extends Component {
   }
 
   render() {
+    var swipeoutBtns = [
+  {
+    text: 'Delete',
+    backgroundColor: 'red',
+    underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+    onPress: () => { this.props.onPress() }
+  }
+]
     const {
       img,
       orderDesc,
@@ -27,6 +39,7 @@ export default class HelloWorldApp extends Component {
       onPress
     } = this.props;
     return (
+
       <View
         style={{
           flex: 1,
@@ -48,7 +61,11 @@ export default class HelloWorldApp extends Component {
           elevation: 5
         }}
       >
+      <Swipeout right={swipeoutBtns}>
+
+
         <Collapse>
+
           <CollapseHeader>
             <View>
               <View
@@ -170,7 +187,10 @@ export default class HelloWorldApp extends Component {
               </View>
             </CollapseBody>
           )}
+
         </Collapse>
+        </Swipeout>
+
       </View>
     );
   }

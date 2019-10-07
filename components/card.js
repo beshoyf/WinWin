@@ -73,6 +73,7 @@ export default class ButtonComponent extends Component {
         }}
       >
         <TouchableOpacity
+        activeOpacity={1}
         onPress={() => menuRef.show(textRef.current, stickTo = Position.TOP_RIGHT)}
         style={{
                   flex: 1,

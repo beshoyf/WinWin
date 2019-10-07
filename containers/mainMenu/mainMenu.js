@@ -102,7 +102,9 @@ class HelloWorldApp extends Component {
     //     useNativeDriver: false
     //   },
     // ).start();
-
+// if(this.props.navigation.state.params !== undefined){
+  // this.props.navigation.navigate("Order");
+// }
     console.log(this.props.user.language);
     i18n.locale = this.props.user.language;
 

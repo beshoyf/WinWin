@@ -26,7 +26,7 @@ const Tabs = createAppContainer(
     },
     {
       initialRouteName: "Upcomming",
-      swipeEnabled: true,
+      swipeEnabled: false,
       animationEnabled: true,
       tabBarOptions: {
         activeTintColor: Colors.primary,
