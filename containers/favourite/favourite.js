@@ -29,48 +29,51 @@ class HelloWorldApp extends Component {
       orderSatus: []
     };
   }
-  renderOrderSatatus = item => (
-    <View
-      style={{
-        marginHorizontal: 10,
-        flex: 1
-      }}
-    >
-    <Card
-      onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
-      pressHeart={() => this.toggleFavorite(item)}
-      brandName={
-        this.props.user.language == "en"
-          ? item.brandName
-          : item.brandAName == null
-          ? item.brandName
-          : item.brandAName
-      }
-      category={item.categoryName}
-      urlImageSmall={item.brandIcon}
-      urlImageLarg={item.image}
-      title={
-        this.props.user.language == "en"
-          ? item.title
-          : item.aTitle == null
-          ? item.title
-          : item.aTitle
-      }
-      onPress={() =>
-        this.props.navigation.navigate("Brand", { brandId: item.brandId })
-      }
-      onPressOffer={() =>
-        this.props.navigation.navigate("Offer", {
-          offerId: item.offerId,
-          categoryName: item.categoryName,
-          brandName: item.brandName
-        })
-      }
-      isfav={item.isFavorite}
-    />
-
-    </View>
-  );
+  renderOrderSatatus = item => {
+    console.log(item);
+    return (
+      <View
+        style={{
+          marginHorizontal: 10,
+          flex: 1
+        }}
+      >
+      <Card
+        onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
+        pressHeart={() => this.toggleFavorite(item)}
+        brandName={
+          this.props.user.language == "en"
+            ? item.brandName
+            : item.brandAName == null
+            ? item.brandName
+            : item.brandAName
+        }
+        category={item.categoryName}
+        urlImageSmall={item.brandIcon}
+        urlImageLarg={item.image}
+        title={
+          this.props.user.language == "en"
+            ? item.title
+            : item.aTitle == null
+            ? item.title
+            : item.aTitle
+        }
+        onPress={() =>
+          this.props.navigation.navigate("Brand", { brandId: item.brandId })
+        }
+        onPressOffer={() =>
+          this.props.navigation.navigate("Offer", {
+            offerId: item.offerId,
+            categoryName: item.categoryName,
+            brandName: item.brandName
+          })
+        }
+        isfav={item.isFavorite}
+      />
+  
+      </View>
+    );
+  }
 
   onShare =  (message) => {
 
@@ -113,7 +116,7 @@ class HelloWorldApp extends Component {
   };
   componentWillMount() {
     this.didFocusSubscription = this.props.navigation.addListener(
-      'focus',
+      'willFocus',
       () => {
         this.setState({ isLoading: true }, this.renderHistory());
       }
@@ -145,7 +148,7 @@ class HelloWorldApp extends Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        //console.log(responseJson);
+        // console.log(responseJson);
         this.setState({
           orderSatus: responseJson,
           isLoading: false

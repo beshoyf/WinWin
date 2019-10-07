@@ -10,7 +10,7 @@ import {
 } from "react-native";
 const { width, height } = Dimensions.get("window");
 import styles from "../styles";
-import OrderCard from "../../../components/orderCard";
+import OrderHistoryCard from "../../../components/OrderHistoryCard";
 import Server from "../../../constants/server";
 import Constants from "expo-constants";
 const { api_url } = Server;
@@ -26,7 +26,7 @@ class HelloWorldApp extends Component {
     };
   }
   renderOrderSatatus = item => (
-    <OrderCard
+    <OrderHistoryCard
       img={item.icon}
       orderDesc={item.title}
       brandName={item.brandName}
