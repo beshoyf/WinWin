@@ -29,10 +29,10 @@ import Offer from "../containers/offer/offer";
 import Branch from "../containers/branch/branch";
 import Order from "../containers/order/order";
 import Contact from "../containers/ContactUs";
-
+import Privacy from "../containers/privacy/privacy";
 import Basket from "../containers/basket/basket";
 import Images from "../containers/images";
-import favourite from "../containers/favourite/favourite";
+import favorite from "../containers/favourite/favourite";
 import Setting from "../containers/drawerMenu/drawerMenu";
 import CustomDrawerContent from "./CustomDrawerContent";
 import { connect } from "react-redux";
@@ -63,8 +63,8 @@ const TabNavigator = createBottomTabNavigator(
         )
       }
     },
-    favourite: {
-      screen: favourite,
+    favorite: {
+      screen: favorite,
       navigationOptions: {
         tabBarIcon: ({ tintColor }) => (
           <MaterialCommunityIcons
@@ -75,7 +75,6 @@ const TabNavigator = createBottomTabNavigator(
         )
       }
     },
-
 
     Setting: {
       screen: Setting,
@@ -112,7 +111,7 @@ const TabNavigator = createBottomTabNavigator(
     tabBarComponent: props => (
       <TabBar
         activeColors={["#0973b9", "#8e87d6", "#fc81d1", "#42a5f5"]} // or activeColors={'#e6b580'}
-        activeTabBackgrounds={["#ede7e6", "#eae3f6", "#eae4f6", "#eae4f6"]} // or activeTabBackgrounds={'#ede7e6'}
+        activeTabBackgrounds={["#fff", "#fff", "#fff", "#fff"]} // or activeTabBackgrounds={'#ede7e6'}
         {...props}
       />
     )
@@ -138,7 +137,11 @@ const appStack1 = createStackNavigator(
     Help: { screen: Help, navigationOptions: { header: null } },
     UserProfile: { screen: UserProfile, navigationOptions: { header: null } },
     Brand: { screen: Brand, navigationOptions: { header: null } },
-    Offer: { screen: Offer, navigationOptions: { header: null }, path: "offer/:offerId/:categoryName/:brandName" },
+    Offer: {
+      screen: Offer,
+      navigationOptions: { header: null },
+      path: "offer/:offerId/:categoryName/:brandName"
+    },
     Branch: { screen: Branch, navigationOptions: { header: null } },
     Contact: {
       screen: Contact,
@@ -178,11 +181,16 @@ const appStack2 = createStackNavigator(
     Help: { screen: Help, navigationOptions: { header: null } },
     UserProfile: { screen: UserProfile, navigationOptions: { header: null } },
     Brand: { screen: Brand, navigationOptions: { header: null } },
-    Offer: { screen: Offer, navigationOptions: { header: null },path: "offer/:offerId/:categoryName/:brandName" },
+    Offer: {
+      screen: Offer,
+      navigationOptions: { header: null },
+      path: "offer/:offerId/:categoryName/:brandName"
+    },
     Branch: { screen: Branch, navigationOptions: { header: null } },
     Order: { screen: Order, navigationOptions: { header: null } },
     Basket: { screen: Basket, navigationOptions: { header: null } },
     QrActivate: { screen: QrActivate, navigationOptions: { header: null } },
+    Privacy: { screen: Privacy, navigationOptions: { header: null } },
     Images: { screen: Images, navigationOptions: { header: null } }
   },
   {

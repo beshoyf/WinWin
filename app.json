@@ -5,7 +5,11 @@
     "slug": "winwin",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "2.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,7 +21,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.egy.winwin",
@@ -29,7 +35,6 @@
       "package": "com.egy.winwin",
       "versionCode": 33
     },
-
     "description": "this app for offers"
   }
 }

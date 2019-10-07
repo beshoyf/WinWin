@@ -29,7 +29,7 @@ const Tabs = createAppContainer(
       swipeEnabled: false,
       animationEnabled: true,
       tabBarOptions: {
-        activeTintColor: Colors.primary,
+        activeTintColor: "#8e87d6",
         showIcon: false,
         upperCaseLabel: false,
         indicatorStyle: { backgroundColor: Colors.primary },

@@ -13,11 +13,18 @@ import {
   Alert
 } from "react-native";
 const { width, height } = Dimensions.get("window");
-
+import ProgresiveImage from "../../components/ProgresiveImage";
 import colors from "../../constants/colors";
 import styles from "./styles";
 import Back from "../../components/back";
-import { AntDesign, Ionicons, SimpleLineIcons, MaterialCommunityIcons, Octicons, Entypo } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Ionicons,
+  SimpleLineIcons,
+  MaterialCommunityIcons,
+  Octicons,
+  Entypo
+} from "@expo/vector-icons";
 import i18n from "../../utils/language";
 import Server from "../../constants/server";
 import Constants from "expo-constants";
@@ -77,7 +84,7 @@ class HelloWorldApp extends Component {
     )
       .then(response => response.json())
       .then(responseJson => {
-        //  console.log("a;slfj;alsfj;alsjf;lasjf", responseJson);
+        //console.log("a;slfj;alsfj;alsjf;lasjf", responseJson);
         this.setState({
           isFavorite: responseJson.isFavorite,
           offer: responseJson,
@@ -120,32 +127,35 @@ class HelloWorldApp extends Component {
             this.setState({
               btnLoad: false
             });
-            this.props.navigation.goBack();
+            this.props.navigation.navigate("Order");
           })
           .catch(err => {
             this.setState({
               btnLoad: false
             });
             if (err.response.status === 400) {
-              if(err.response.data.detail == "You cannot make an order you have unfinished one."){
+              if (
+                err.response.data.detail ==
+                "You cannot make an order you have unfinished one."
+              ) {
                 Alert.alert(
-                  ' WARNING',
-                  'You already have un finished order',
+                  " WARNING",
+                  "You already have un finished order",
                   [
-                    {text: 'go to order', onPress: () => this.props.navigation.goBack()},
                     {
-                      text: 'Cancel',
-                      onPress: () => console.log('Cancel Pressed'),
-                      style: 'cancel',
+                      text: "go to order",
+                      onPress: () => this.props.navigation.navigate("Order")
+                    },
+                    {
+                      text: "Cancel",
+                      onPress: () => console.log("Cancel Pressed"),
+                      style: "cancel"
                     }
                   ],
-                  {cancelable: false},
+                  { cancelable: false }
                 );
-
-              }
-              else {
+              } else {
                 alert(err.response.data.detail);
-
               }
             } else {
               alert("try again");
@@ -202,13 +212,13 @@ class HelloWorldApp extends Component {
       <ParallaxScrollView
         onScroll={onScroll}
         headerBackgroundColor="#F2F2F2"
-      contentBackgroundColor="#F2F2F2"
-        style={{ backgroundColor: 'red' }}
+        contentBackgroundColor="#F2F2F2"
+        style={{ backgroundColor: "red" }}
         stickyHeaderHeight={STICKY_HEADER_HEIGHT}
         parallaxHeaderHeight={PARALLAX_HEADER_HEIGHT}
         backgroundSpeed={10}
         renderContentBackground={() => (
-          <View style={{ backgroundColor: '#F2F2F2' }}>
+          <View style={{ backgroundColor: "#F2F2F2" }}>
             <View style={{ marginHorizontal: 20 }}>
               <View
                 style={{
@@ -222,14 +232,13 @@ class HelloWorldApp extends Component {
               >
                 <View
                   style={{
-                    flex: .5,
+                    flex: 0.5,
                     borderRadius: 10,
                     backgroundColor: "#F68E1E",
                     padding: 10,
                     paddingVertical: 15,
                     alignItems: "center",
-                    justifyContent: "center",
-
+                    justifyContent: "center"
                   }}
                 >
                   <Text style={styles.title}>
@@ -244,7 +253,7 @@ class HelloWorldApp extends Component {
                   style={{
                     flexDirection: "row",
                     flex: 1,
-                    justifyContent: 'flex-end'
+                    justifyContent: "flex-end"
                   }}
                 >
                   <MaterialCommunityIcons
@@ -255,12 +264,16 @@ class HelloWorldApp extends Component {
                     style={{
                       paddingHorizontal: 10,
                       paddingLeft: 20,
-                      paddingVertical: 10,
+                      paddingVertical: 10
                     }}
                   />
                   <MaterialCommunityIcons
                     onPress={this.toggleFavorite}
-                    name={this.state.isFavorite ? "heart-circle" : "heart-circle-outline"}
+                    name={
+                      this.state.isFavorite
+                        ? "heart-circle"
+                        : "heart-circle-outline"
+                    }
                     size={38}
                     color={this.state.isFavorite ? "red" : colors.primary}
                     style={{
@@ -287,7 +300,16 @@ class HelloWorldApp extends Component {
                 }}
               >
                 <View style={styles.counter}>
-                    <View style={{ backgroundColor: '#F7B0B1', width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                  <View
+                    style={{
+                      backgroundColor: "#F7B0B1",
+                      width: 40,
+                      height: 40,
+                      borderRadius: 20,
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
                     <Entypo
                       onPress={() => this.decrease()}
                       name="minus"
@@ -297,32 +319,56 @@ class HelloWorldApp extends Component {
                     />
                   </View>
 
-                  <View style={{ flexDirection: "row", marginHorizontal: 15, backgroundColor: '#b0b0b0', borderRadius: 5 }}>
-                    <Text style={{ color: '#FFF', fontWeight: 'bold', paddingVertical: 10, paddingHorizontal: 20 }}>{`${this.state.count} / ${this.state.offer.useLimit}`}</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      marginHorizontal: 15,
+                      backgroundColor: "#b0b0b0",
+                      borderRadius: 5
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#FFF",
+                        fontWeight: "bold",
+                        paddingVertical: 10,
+                        paddingHorizontal: 20
+                      }}
+                    >{`${this.state.count} / ${this.state.offer.useLimit}`}</Text>
                   </View>
 
-                  <View style={{ backgroundColor: '#F7B0B1', width: 40, height: 40, borderRadius: 20, justifyContent: 'center', alignItems: 'center' }}>
+                  <View
+                    style={{
+                      backgroundColor: "#F7B0B1",
+                      width: 40,
+                      height: 40,
+                      borderRadius: 20,
+                      justifyContent: "center",
+                      alignItems: "center"
+                    }}
+                  >
                     <Octicons
                       onPress={() => this.increase()}
                       name="plus"
                       size={22}
                       style={{ padding: 5 }}
                       color="#FFF"
-                      />
-                    </View>
-
+                    />
+                  </View>
                 </View>
               </View>
             </View>
             <AwesomeButton
               progress
-              width={width - 40}
-              backgroundColor={colors.primary}
-              backgroundDarker="#065d96"
-              borderRadius={10}
-              style={{ alignSelf: "center" }}
+              width={width * 0.48}
+              height={50}
+              backgroundColor={"#2e6cff"}
+              backgroundDarker="transparent"
+              borderRadius={30}
+              textSize={17}
+              style={{ alignSelf: "center", left: 2 }}
               onPress={next => {
-                this.offer()
+                this.offer();
                 next();
               }}
             >
@@ -339,14 +385,20 @@ class HelloWorldApp extends Component {
         )}
         renderBackground={() => (
           <View style={{}} key="background">
-            <Image
+            <ProgresiveImage
+              thumbnailSource={{ uri: this.state.offer.subNails }}
+              source={{ uri: this.state.offer.image }}
+              style={{ height: PARALLAX_HEADER_HEIGHT, width: window.width }}
+            />
+            {/* <Image
+              
               blurRadius={2}
               source={{
                 uri: this.state.offer.image,
                 width: window.width,
                 height: PARALLAX_HEADER_HEIGHT
               }}
-            />
+            /> */}
             <View
               style={{
                 position: "absolute",
@@ -360,7 +412,7 @@ class HelloWorldApp extends Component {
         )}
         renderForeground={() => (
           <View key="parallax-header" style={styles.parallaxHeader}>
-            <Text style={{...styles.sectionSpeakerText }}>
+            <Text style={{ ...styles.sectionSpeakerText }}>
               {this.props.user.language == "en"
                 ? this.state.offer.brandName
                 : this.state.offer.brandAName == null
@@ -371,20 +423,21 @@ class HelloWorldApp extends Component {
         )}
         renderStickyHeader={() => (
           <View key="sticky-header" style={styles.stickySection}>
-            <Text style={{...styles.stickySectionText}}>
-              {
-                this.state.offer.brandName ?
-                  this.state.offer.brandAName.length > 15 ?
-                    `${this.state.offer.brandName.substring(0, 15)}...`
+            <Text style={{ ...styles.stickySectionText }}>
+              {this.state.offer.brandName
+                ? this.state.offer.brandAName.length > 15
+                  ? `${this.state.offer.brandName.substring(0, 15)}...`
                   : this.state.offer.brandName
-                : null
-              }
+                : null}
             </Text>
           </View>
         )}
         renderFixedHeader={() => (
           <View key="fixed-header" style={styles.fixedSection}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.goBack()}
+              style={{ flexDirection: "row", alignItems: "center" }}
+            >
               <Ionicons
                 onPress={() => this.props.navigation.goBack()}
                 name="ios-arrow-back"
@@ -401,7 +454,7 @@ class HelloWorldApp extends Component {
               >
                 back
               </Text>
-            </View>
+            </TouchableOpacity>
           </View>
         )}
       />

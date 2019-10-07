@@ -62,16 +62,13 @@ class HelloWorldApp extends Component {
   );
   componentWillMount() {
     this.didFocusSubscription = this.props.navigation.addListener(
-      'didFocus',
+      "didFocus",
       () => {
         this.setState({ isLoading: true }, this.renderUpcoming());
       }
     );
 
-
     this.setState({ id: this.props.user.userId });
-
-
   }
   componentWillUnmount() {
     // Remove the listener when you are done
@@ -98,7 +95,7 @@ class HelloWorldApp extends Component {
     )
       .then(response => response.json())
       .then(responseJson => {
-        // console.log(responseJson);
+        console.log(responseJson);
         this.setState({
           orderSatus: responseJson,
           isLoading: false

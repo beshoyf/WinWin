@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Clipboard } from 'react-native'
+import { Clipboard } from "react-native";
 import { EDIT_USER } from "../../store/CONSTANTS";
 const { width, height } = Dimensions.get("window");
 import axios from "axios";
@@ -19,8 +19,8 @@ import Server from "../../constants/server";
 import i18n from "../../utils/language";
 import { connect } from "react-redux";
 import { logIn } from "../../store/actions/user";
-import * as Facebook from 'expo-facebook';
-import { Ionicons, MaterialIcons,Entypo } from "@expo/vector-icons";
+import * as Facebook from "expo-facebook";
+import { Ionicons, MaterialIcons, Entypo } from "@expo/vector-icons";
 
 const { api_url } = Server;
 class HelloWorldApp extends Component {
@@ -41,19 +41,19 @@ class HelloWorldApp extends Component {
   componentWillMount() {
     i18n.locale = this.state.language;
   }
-   loginFacebook = async() =>{
+  loginFacebook = async () => {
     try {
       const {
         type,
         token,
         expires,
         permissions,
-        declinedPermissions,
-      } = await Facebook.logInWithReadPermissionsAsync('1120854974780852', {
-        permissions: ['public_profile'],
+        declinedPermissions
+      } = await Facebook.logInWithReadPermissionsAsync("1120854974780852", {
+        permissions: ["public_profile"]
       });
-      if (type === 'success') {
-        Clipboard.setString(token)
+      if (type === "success") {
+        Clipboard.setString(token);
         axios({
           method: "POST",
           headers: {
@@ -85,7 +85,7 @@ class HelloWorldApp extends Component {
     } catch ({ message }) {
       alert(`Facebook Login Error: ${message}`);
     }
-  }
+  };
 
   login = () => {
     if (this.state.name.length < 1 || this.state.pass.length < 1) {
@@ -161,7 +161,7 @@ class HelloWorldApp extends Component {
           >
             <Image
               source={require("../../assets/win.png")}
-              style={{ width: 150, height: 150 }}
+              style={{ width: 150, height: 150, marginBottom: 20 }}
               resizeMode="contain"
             />
           </View>
@@ -264,16 +264,36 @@ class HelloWorldApp extends Component {
                   this._button = ref;
                 }}
                 onPress={this.loginFacebook}
-                style={{...styles.button, backgroundColor: "#415DAF"}}
+                style={{
+                  ...styles.button,
+                  backgroundColor: "#415DAF",
+                  alignItems: "center"
+                }}
               >
-                <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                      <Entypo name="facebook-with-circle" style={{ paddingHorizontal:5,color:'white',fontSize:23}} />
-                    </View>
-                    <Text style={{ ...styles.textButton, textAlign: 'center', }}>{i18n.t("login_with_facebook")}</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    paddingHorizontal: 10,
+                    alignItems: "center"
+                  }}
+                >
+                  <View
+                    style={{ justifyContent: "center", alignItems: "center" }}
+                  >
+                    <Entypo
+                      name="facebook-with-circle"
+                      style={{
+                        paddingHorizontal: 5,
+                        color: "white",
+                        fontSize: 23
+                      }}
+                    />
                   </View>
+                  <Text style={{ ...styles.textButton, textAlign: "center" }}>
+                    {i18n.t("login_with_facebook")}
+                  </Text>
+                </View>
               </TouchableOpacity>
-
             </View>
             <View style={{ flex: 1 }}></View>
           </View>

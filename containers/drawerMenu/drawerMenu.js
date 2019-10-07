@@ -12,7 +12,12 @@ import {
 } from "react-native";
 import styles from "./styles";
 const { width, height } = Dimensions.get("window");
-import { Ionicons, Entypo, MaterialCommunityIcons,FontAwesome } from "@expo/vector-icons";
+import {
+  Ionicons,
+  Entypo,
+  MaterialCommunityIcons,
+  FontAwesome
+} from "@expo/vector-icons";
 import Back from "../../components/back";
 import i18n from "../../utils/language";
 import colors from "../../constants/colors";
@@ -186,9 +191,8 @@ class HelloWorldApp extends Component {
               <Ionicons name="ios-arrow-forward" size={20} color="grey" />
             </TouchableOpacity>
 
-
             <TouchableOpacity
-              onPress={() => Linking.openURL("https://winwin-eg.com/privacy")}
+              onPress={() => this.props.navigation.navigate("Privacy")}
               style={[
                 styles.smallCard,
                 {
@@ -200,12 +204,14 @@ class HelloWorldApp extends Component {
                 }
               ]}
             >
-              <View style={{ alignItems: "center", flexDirection: "row" }}>
+              <View
+                style={{ alignItems: "center", flexDirection: "row", right: 5 }}
+              >
                 <MaterialCommunityIcons
-                  name='security'
+                  name="security"
                   size={30}
                   color="grey"
-                  style={[styles.imageCard, { right: 4 }]}
+                  style={[styles.imageCard, {}]}
                 />
                 <Text
                   style={[
@@ -219,9 +225,8 @@ class HelloWorldApp extends Component {
               <Ionicons name="ios-arrow-forward" size={20} color="grey" />
             </TouchableOpacity>
 
-
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Contact')}
+              onPress={() => this.props.navigation.navigate("Contact")}
               style={[
                 styles.smallCard,
                 {
@@ -235,10 +240,8 @@ class HelloWorldApp extends Component {
             >
               <View style={{ alignItems: "center", flexDirection: "row" }}>
                 <FontAwesome
-                  name={
-                    'envelope-open-o'
-                  }
-                  size={30}
+                  name={"envelope-open-o"}
+                  size={25}
                   color="grey"
                   style={[styles.imageCard, { right: 3 }]}
                 />
@@ -248,14 +251,11 @@ class HelloWorldApp extends Component {
                     { marginLeft: 10, color: colors.primary }
                   ]}
                 >
-                  {i18n.t("contact")}
+                  {i18n.t("contactus")}
                 </Text>
               </View>
               <Ionicons name="ios-arrow-forward" size={20} color="grey" />
             </TouchableOpacity>
-
-
-
 
             <Text style={[styles.subHeadText, { marginTop: 20 }]}>
               {i18n.t("more")}
@@ -286,43 +286,7 @@ class HelloWorldApp extends Component {
                 <Text style={styles.headText}>English</Text>
               )}
             </TouchableOpacity>
-            <Text style={[styles.subHeadText, { marginTop: 20 }]}>
-              {i18n.t("contactus")}
-            </Text>
-            <View style={styles.socialMediaView}>
-              <Entypo
-                onPress={() =>
-                  Linking.openURL("https://www.facebook.com/winwinegypt/")
-                }
-                name="facebook-with-circle"
-                size={32}
-                color={colors.primary}
-                style={{ marginHorizontal: 10 }}
-              />
-              <Entypo
-                onPress={() =>
-                  Linking.openURL("https://instagram.com/winwin_eg")
-                }
-                name="instagram-with-circle"
-                size={32}
-                color={colors.primary}
-                style={{ marginHorizontal: 10 }}
-              />
-              <Ionicons
-                onPress={this._pressCall}
-                name="ios-call"
-                size={32}
-                color={colors.primary}
-                style={{ marginHorizontal: 10 }}
-              />
-              <MaterialCommunityIcons
-                onPress={() => Linking.openURL("https://Www.winwin-eg.com")}
-                name="web"
-                size={32}
-                color={colors.primary}
-                style={{ marginHorizontal: 10 }}
-              />
-            </View>
+
             <TouchableOpacity
               onPress={this.handleLogout}
               style={{

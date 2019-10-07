@@ -19,7 +19,6 @@ import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 const { api_url } = Server;
 import { connect } from "react-redux";
 class HelloWorldApp extends Component {
-
   constructor(props) {
     super(props);
 
@@ -38,51 +37,56 @@ class HelloWorldApp extends Component {
           flex: 1
         }}
       >
-      <Card
-        onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
-        pressHeart={() => this.toggleFavorite(item)}
-        brandName={
-          this.props.user.language == "en"
-            ? item.brandName
-            : item.brandAName == null
-            ? item.brandName
-            : item.brandAName
-        }
-        category={item.categoryName}
-        urlImageSmall={item.brandIcon}
-        urlImageLarg={item.image}
-        title={
-          this.props.user.language == "en"
-            ? item.title
-            : item.aTitle == null
-            ? item.title
-            : item.aTitle
-        }
-        onPress={() =>
-          this.props.navigation.navigate("Brand", { brandId: item.brandId })
-        }
-        onPressOffer={() =>
-          this.props.navigation.navigate("Offer", {
-            offerId: item.offerId,
-            categoryName: item.categoryName,
-            brandName: item.brandName
-          })
-        }
-        isfav={item.isFavorite}
-      />
-  
+        <Card
+          onPressShare={() =>
+            this.onShare(
+              "winwin://offer/" +
+                item.offerId +
+                "/" +
+                item.catName +
+                "/" +
+                item.brandName
+            )
+          }
+          pressHeart={() => this.toggleFavorite(item)}
+          brandName={
+            this.props.user.language == "en"
+              ? item.brandName
+              : item.brandAName == null
+              ? item.brandName
+              : item.brandAName
+          }
+          category={item.categoryName}
+          urlImageSmall={item.subNails}
+          urlImageLarg={item.image}
+          title={
+            this.props.user.language == "en"
+              ? item.title
+              : item.aTitle == null
+              ? item.title
+              : item.aTitle
+          }
+          onPress={() =>
+            this.props.navigation.navigate("Brand", { brandId: item.brandId })
+          }
+          onPressOffer={() =>
+            this.props.navigation.navigate("Offer", {
+              offerId: item.offerId,
+              categoryName: item.categoryName,
+              brandName: item.brandName
+            })
+          }
+          isfav={item.isFavorite}
+        />
       </View>
     );
-  }
+  };
 
-  onShare =  (message) => {
-
-     Share.share({
-        message,
-        url:message
-      });
-
-
+  onShare = message => {
+    Share.share({
+      message,
+      url: message
+    });
   };
 
   toggleFavorite = item => {
@@ -116,14 +120,11 @@ class HelloWorldApp extends Component {
   };
   componentWillMount() {
     this.didFocusSubscription = this.props.navigation.addListener(
-      'willFocus',
+      "willFocus",
       () => {
         this.setState({ isLoading: true }, this.renderHistory());
       }
     );
-
-
-
 
     this.setState({ id: this.props.user.userId });
   }
@@ -165,33 +166,33 @@ class HelloWorldApp extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={[styles.setting, { color: colors.primary,padding:5 }]}>
-          Favourite
+        <Text style={[styles.setting, { color: colors.primary, padding: 5 }]}>
+          favorite
         </Text>
         {this.state.isLoading == true ? (
           <View>
-          <ShimmerPlaceHolder
-            style={{ marginHorizontal: 13, borderRadius: 15 }}
-            autoRun={true}
-            height={height * 0.28}
-            width={width * 0.94}
-            visible={false}
-          ></ShimmerPlaceHolder>
-          <ShimmerPlaceHolder
-            style={{ marginHorizontal: 13, borderRadius: 15, marginTop: 10 }}
-            autoRun={true}
-            height={height * 0.28}
-            width={width * 0.94}
-            visible={false}
-          ></ShimmerPlaceHolder>
-          <ShimmerPlaceHolder
-            style={{ marginHorizontal: 13, borderRadius: 15, marginTop: 10 }}
-            autoRun={true}
-            height={height * 0.28}
-            width={width * 0.94}
-            visible={false}
-          ></ShimmerPlaceHolder>
-        </View>
+            <ShimmerPlaceHolder
+              style={{ marginHorizontal: 13, borderRadius: 15 }}
+              autoRun={true}
+              height={height * 0.28}
+              width={width * 0.94}
+              visible={false}
+            ></ShimmerPlaceHolder>
+            <ShimmerPlaceHolder
+              style={{ marginHorizontal: 13, borderRadius: 15, marginTop: 10 }}
+              autoRun={true}
+              height={height * 0.28}
+              width={width * 0.94}
+              visible={false}
+            ></ShimmerPlaceHolder>
+            <ShimmerPlaceHolder
+              style={{ marginHorizontal: 13, borderRadius: 15, marginTop: 10 }}
+              autoRun={true}
+              height={height * 0.28}
+              width={width * 0.94}
+              visible={false}
+            ></ShimmerPlaceHolder>
+          </View>
         ) : (
           <FlatList
             data={this.state.orderSatus}

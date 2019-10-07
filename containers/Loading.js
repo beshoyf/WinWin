@@ -14,11 +14,10 @@ import { connect } from "react-redux";
 const { width, height } = Dimensions.get("window");
 import { LoginStack, MenuStack } from "../navigation/RootNavigation";
 import Rates from "../containers/Rates/rates";
-import { Linking } from 'expo';
-import { NavigationActions } from 'react-navigation';
+import { Linking } from "expo";
+import { NavigationActions } from "react-navigation";
 let _navigator;
-
-
+import CountDown from "react-native-countdown-component";
 
 const isEmpty = obj => {
   for (var key in obj) {
@@ -28,7 +27,6 @@ const isEmpty = obj => {
 };
 
 class Loading extends Component {
-
   state = {
     submited: true,
     fadeAnim: new Animated.Value(1),
@@ -65,21 +63,19 @@ class Loading extends Component {
 
   // }
 
-   setTopLevelNavigator = (navigatorRef) =>{
+  setTopLevelNavigator = navigatorRef => {
     _navigator = navigatorRef;
-  }
-   navigate = (routeName, params) =>{
-     this.navigator.dispatch(
-  NavigationActions.navigate({
-    routeName: routeName,
-    params
-  }),
-)
-
-}
+  };
+  navigate = (routeName, params) => {
+    this.navigator.dispatch(
+      NavigationActions.navigate({
+        routeName: routeName,
+        params
+      })
+    );
+  };
 
   componentDidMount() {
-
     // Linking.addEventListener("url", this._handleUrl);
     // Linking.getInitialURL()
     //         .then(url => {
@@ -98,15 +94,21 @@ class Loading extends Component {
   }
 
   render() {
-
-    const prefix = Linking.makeUrl("/") ;
-  console.log('deaplink : '+prefix);
+    const prefix = Linking.makeUrl("/");
+    console.log("deaplink : " + prefix);
 
     const { fadeAnim, fadeAnim2, borderRadiusAnim } = this.state;
     return (
       <>
         {!isEmpty(this.props.user) ? (
           <View style={{ flex: 1 }}>
+            <CountDown
+              until={60}
+              onFinish={() => this.setState({ submited: false })}
+              onPress={() => alert("hello")}
+              size={20}
+              style={{ position: "absolute" }}
+            />
             {this.state.submited ? null : (
               <>
                 <Animated.View
@@ -146,7 +148,7 @@ class Loading extends Component {
                 </Animated.View>
               </>
             )}
-            <MenuStack uriPrefix={prefix}   />
+            <MenuStack uriPrefix={prefix} />
           </View>
         ) : (
           <LoginStack uriPrefix={prefix} />
