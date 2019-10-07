@@ -19,6 +19,7 @@ import ShimmerPlaceHolder from "react-native-shimmer-placeholder";
 const { api_url } = Server;
 import { connect } from "react-redux";
 class HelloWorldApp extends Component {
+
   constructor(props) {
     super(props);
 
@@ -111,7 +112,21 @@ class HelloWorldApp extends Component {
       });
   };
   componentWillMount() {
+    this.didFocusSubscription = this.props.navigation.addListener(
+      'focus',
+      () => {
+        this.setState({ isLoading: true }, this.renderHistory());
+      }
+    );
+
+
+
+
     this.setState({ id: this.props.user.userId });
+  }
+  componentWillUnmount() {
+    // Remove the listener when you are done
+    this.didFocusSubscription.remove();
   }
   componentDidMount() {
     this.renderHistory();

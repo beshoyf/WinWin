@@ -120,7 +120,7 @@ class HelloWorldApp extends Component {
             this.setState({
               btnLoad: false
             });
-            this.props.navigation.navigate("Order");
+            this.props.navigation.push("MainMenu",{whereToGo:'Order'});
           })
           .catch(err => {
             this.setState({
@@ -132,7 +132,7 @@ class HelloWorldApp extends Component {
   ' WARNING',
   'You already have un finished order',
   [
-    {text: 'go to order', onPress: () => this.props.navigation.navigate("Order",{order:1})},
+    {text: 'go to order', onPress: () => this.props.navigation.navigate("Order",{refresh:1})},
     {
       text: 'Cancel',
       onPress: () => console.log('Cancel Pressed'),

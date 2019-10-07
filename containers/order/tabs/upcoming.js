@@ -61,8 +61,23 @@ class HelloWorldApp extends Component {
     />
   );
   componentWillMount() {
+    this.didFocusSubscription = this.props.navigation.addListener(
+      'didFocus',
+      () => {
+        this.setState({ isLoading: true }, this.renderUpcoming());
+      }
+    );
+
+
     this.setState({ id: this.props.user.userId });
+
+
   }
+  componentWillUnmount() {
+    // Remove the listener when you are done
+    this.didFocusSubscription.remove();
+  }
+
   componentDidMount() {
     this.renderUpcoming();
   }

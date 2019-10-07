@@ -33,7 +33,23 @@ class HelloWorldApp extends Component {
       date={null}
     />
   );
+
+
+
+
+  componentWillUnmount() {
+    // Remove the listener when you are done
+    this.didFocusSubscription.remove();
+  }
+
   componentWillMount() {
+    this.didFocusSubscription = this.props.navigation.addListener(
+      'didFocus',
+      () => {
+        this.setState({ doneFetches: 0 });
+        this.renderHistory();
+      }
+    );
     this.setState({ id: this.props.user.userId });
   }
   componentDidMount() {

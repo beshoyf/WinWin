@@ -31,6 +31,12 @@ import Constants from "expo-constants";
 const { width, height } = Dimensions.get("window");
 import { connect } from "react-redux";
 class HelloWorldApp extends Component {
+  componentWillMount() {
+    const { navigation } = this.props;
+    const whereToGo = navigation.getParam("whereToGo", "NO-ID");
+  this.props.navigation.navigate(whereToGo);
+}
+
   constructor(props) {
     super(props);
     this.state = {
