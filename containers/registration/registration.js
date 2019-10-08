@@ -7,8 +7,10 @@ import {
   SafeAreaView,
   ImageBackground,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
+  Button
 } from "react-native";
+import DateTimePicker from "react-native-modal-datetime-picker";
 const { width, height } = Dimensions.get("window");
 import { EDIT_USER } from "../../store/CONSTANTS";
 import { DatePicker } from "native-base";
@@ -39,10 +41,27 @@ class HelloWorldApp extends Component {
       day: null,
       date: "",
       fetching: false,
-      chosenDate: new Date()
+      chosenDate: new Date(),
+      isDateTimePickerVisible: false,
+      dateIOS: ""
     };
     this.setDate = this.setDate.bind(this);
   }
+  showDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: true });
+  };
+
+  hideDateTimePicker = () => {
+    this.setState({ isDateTimePickerVisible: false });
+  };
+
+  handleDatePicked = dates => {
+    var s = new Date(dates).toLocaleDateString();
+    // console.log("A date has been picked: ", dates);
+    //console.log(s);
+    this.setState({ dateIOS: s }, () => this.hideDateTimePicker());
+    // console.log("error", this.state.dateIOS);
+  };
   login = () => {
     if (
       this.state.name.length < 4 ||
@@ -80,7 +99,7 @@ class HelloWorldApp extends Component {
           UserName: this.state.name,
           Email: this.state.email,
           Phone: this.state.phone,
-          Birthday: this.state.date,
+          Birthday: this.state.dateIOS,
           Password: this.state.password,
           IsActive: false
         })
@@ -179,25 +198,42 @@ class HelloWorldApp extends Component {
             ) : null}
           </View>
           <View style={styles.dateView}>
-            <DatePicker
-              ref={ref => {
-                this.date = ref;
+            <TouchableOpacity
+              style={{
+                justifyContent: "center"
               }}
-              defaultDate={new Date(2000, 4, 4)}
-              minimumDate={new Date(1960, 1, 1)}
-              maximumDate={
-                new Date(this.state.year, this.state.month, this.state.day)
-              }
-              locale={"en"}
-              timeZoneOffsetInMinutes={undefined}
-              modalTransparent={false}
-              animationType={"fade"}
-              androidMode={"default"}
-              placeHolderText={i18n.t("birthday")}
-              placeHolderTextStyle={{ marginTop: 5, color: colors.Grey }}
-              textStyle={{ color: "black", marginTop: 5 }}
-              onDateChange={this.setDate}
-              disabled={false}
+              onPress={this.showDateTimePicker}
+            >
+              {this.state.dateIOS == "" ? (
+                <Text
+                  style={{
+                    marginTop: width * 0.04,
+                    color: colors.Grey,
+                    marginHorizontal: 10
+                  }}
+                >
+                  {i18n.t("birthday")}
+                </Text>
+              ) : (
+                <Text
+                  style={{
+                    marginTop: width * 0.04,
+                    color: colors.Grey,
+                    marginHorizontal: 10
+                  }}
+                >
+                  {this.state.dateIOS}
+                </Text>
+              )}
+            </TouchableOpacity>
+            <DateTimePicker
+              mode="date"
+              confirmTextStyle={{ color: "white" }}
+              titleIOS="birthday"
+              isVisible={this.state.isDateTimePickerVisible}
+              onConfirm={this.handleDatePicked}
+              onCancel={this.hideDateTimePicker}
+              datePickerContainerStyleIOS={{ backgroundColor: "grey" }}
             />
           </View>
           <View
@@ -307,38 +343,7 @@ class HelloWorldApp extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        {/* <Back
-          onPress={() => this.props.navigation.navigate("Login")}
-          title={i18n.t("signUp")}
-        />
-        <ScrollView style={styles.flex}>
-          <TextInput
-            style={styles.textinpute}
-            placeholder={i18n.t("username")}
-            autoCapitalize="none"
-            placeholderTextColor={colors.primary}
-            onSubmitEditing={() => this._inpute && this._inpute.focus()}
-            onChangeText={text => this.setState({ name: text })}
-          />
-          {this.state.nameWrong != "" ? (
-            <Text style={styles.wrong}>{this.state.nameWrong}</Text>
-          ) : null}
-
-          <TextInput
-            style={styles.textinpute}
-            placeholder={i18n.t("email")}
-            autoCapitalize="none"
-            placeholderTextColor={colors.primary}
-            ref={ref => {
-              this._inpute = ref;
-            }}
-            onSubmitEditing={() => this.date}
-            onChangeText={text => this.setState({ email: text })}
-          />
-          {this.state.emailWrong != "" ? (
-            <Text style={styles.wrong}>{this.state.emailWrong}</Text>
-          ) : null}
-
+        {/*
           <View style={styles.dateView}>
             <DatePicker
               ref={ref => {
@@ -361,70 +366,7 @@ class HelloWorldApp extends Component {
               disabled={false}
             />
           </View>
-          <TextInput
-            style={styles.textinpute}
-            placeholder={i18n.t("phone")}
-            autoCapitalize="none"
-            placeholderTextColor={colors.primary}
-            onSubmitEditing={() => this.pass && this.pass.focus()}
-            onChangeText={text => this.setState({ phone: text })}
-            keyboardType="numeric"
-          />
-          {this.state.phoneWrong != "" ? (
-            <Text style={styles.wrong}>{this.state.phoneWrong}</Text>
-          ) : null}
-
-          <TextInput
-            style={[
-              styles.textinpute,
-              { textAlign: i18n.locale == "ar" ? "right" : null }
-            ]}
-            placeholder={i18n.t("password")}
-            autoCapitalize="none"
-            placeholderTextColor={colors.primary}
-            onSubmitEditing={() => this.cpass && this.cpass.focus()}
-            ref={ref => {
-              this.pass = ref;
-            }}
-            onChangeText={text => this.setState({ password: text })}
-            secureTextEntry={true}
-          />
-          {this.state.passwordWrong != "" ? (
-            <Text style={styles.wrong}>{this.state.passwordWrong}</Text>
-          ) : null}
-
-          <TextInput
-            style={[
-              styles.textinpute,
-              { textAlign: i18n.locale == "ar" ? "right" : null }
-            ]}
-            placeholder={i18n.t("confirm")}
-            autoCapitalize="none"
-            placeholderTextColor={colors.primary}
-            onSubmitEditing={() => this.button && this.login()}
-            ref={ref => {
-              this.cpass = ref;
-            }}
-            onChangeText={text => this.setState({ rePassword: text })}
-            secureTextEntry={true}
-          />
-          {this.state.rePasswordWrong != "" ? (
-            <Text style={styles.wrong}>{this.state.rePasswordWrong}</Text>
-          ) : null}
-
-          <TouchableOpacity
-            ref={ref => {
-              this.button = ref;
-            }}
-            onPress={this.login}
-            style={styles.button}
-          >
-            {this.state.fetching ? (
-              <ActivityIndicator color="white" />
-            ) : (
-              <Text style={styles.textButton}>{i18n.t("signUp")}</Text>
-            )}
-          </TouchableOpacity>
+         
         </ScrollView> */}
       </SafeAreaView>
     );

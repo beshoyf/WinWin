@@ -4,6 +4,7 @@ import styles from "./styles";
 import Colors from "../../constants/colors";
 import Back from "../../components/back";
 import i18n from "../../utils/language";
+import colors from "../../constants/colors";
 const { width, height } = Dimensions.get("window");
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import {
@@ -57,6 +58,9 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <Text style={[styles.setting, { color: colors.primary, padding: 5 }]}>
+          Order
+        </Text>
         <Tabs />
       </SafeAreaView>
     );

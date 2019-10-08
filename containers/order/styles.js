@@ -18,6 +18,12 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: Colors.primary
+  },
+  setting: {
+    marginHorizontal: 20,
+    fontSize: 22,
+    padding: 10,
+    fontWeight: "500"
   }
 });
 

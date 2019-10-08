@@ -302,7 +302,7 @@ class HelloWorldApp extends Component {
                 <View style={styles.counter}>
                   <View
                     style={{
-                      backgroundColor: "#F7B0B1",
+                      backgroundColor: "#0055FF",
                       width: 40,
                       height: 40,
                       borderRadius: 20,
@@ -339,7 +339,7 @@ class HelloWorldApp extends Component {
 
                   <View
                     style={{
-                      backgroundColor: "#F7B0B1",
+                      backgroundColor: "#F50909",
                       width: 40,
                       height: 40,
                       borderRadius: 20,

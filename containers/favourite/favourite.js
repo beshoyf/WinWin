@@ -167,7 +167,7 @@ class HelloWorldApp extends Component {
     return (
       <View style={styles.container}>
         <Text style={[styles.setting, { color: colors.primary, padding: 5 }]}>
-          favorite
+          Favorite
         </Text>
         {this.state.isLoading == true ? (
           <View>
@@ -206,14 +206,11 @@ class HelloWorldApp extends Component {
                 style={{
                   flex: 1,
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
+                  paddingTop: height * 0.4
                 }}
               >
-                <Image
-                  resizeMode="contain"
-                  source={require("../../assets/swipe.png")}
-                  style={{ width: width * 0.5, height: height * 0.5 }}
-                />
+                <Text style={{ fontSize: 16 }}>No Offer</Text>
               </View>
             }
           />
