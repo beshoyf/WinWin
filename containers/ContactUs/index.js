@@ -135,7 +135,7 @@ class HelloWorldApp extends Component {
       <SafeAreaView style={styles.container}>
         <Back
           onPress={() => this.props.navigation.goBack()}
-          title="Contact Us"
+          title={i18n.t("contactus")}
           styles={{
             marginBottom: 0,
             borderBottomWidth: 0,
@@ -154,9 +154,9 @@ class HelloWorldApp extends Component {
             style={[
               styles.textinpute,
               {
-                backgroundColor:  "white" ,
-                color:  "black",
-                textAlign:'center'
+                backgroundColor: "white",
+                color: "black",
+                textAlign: "center"
               }
             ]}
             placeholder="Full Name"
@@ -184,9 +184,9 @@ class HelloWorldApp extends Component {
             style={[
               styles.textinpute,
               {
-                backgroundColor:  "white" ,
-                color:  "black",
-                textAlign:'center'
+                backgroundColor: "white",
+                color: "black",
+                textAlign: "center"
               }
             ]}
             placeholder="Email.com"
@@ -216,22 +216,20 @@ class HelloWorldApp extends Component {
             style={[
               styles.textinpute,
               {
-                backgroundColor:  "white" ,
-                color:  "blacks",
-                height:100,
-                textAlign:'center'
+                backgroundColor: "white",
+                color: "blacks",
+                height: 100,
+                textAlign: "center"
               }
             ]}
             placeholder="Message"
             autoCapitalize="none"
             multiline={true}
-numberOfLines={4}
-
+            numberOfLines={4}
             placeholderTextColor={colors.primary}
             onChangeText={text => this.mobile(text)}
             selectTextOnFocus={this.state.edit}
             value={this.state.message}
-
           />
           <View
             style={{
@@ -245,7 +243,6 @@ numberOfLines={4}
               <Text style={styles.wrong}>{this.state.phoneWrong}</Text>
             ) : null}
           </View>
-
         </View>
         <View
           style={{
@@ -255,17 +252,15 @@ numberOfLines={4}
           }}
         >
           <View style={{ flex: 1, justifyContent: "center" }}>
-
-              <TouchableOpacity
-                ref={ref => {
-                  this.button = ref;
-                }}
-                onPress={() => this.submit()}
-                style={styles.button}
-              >
-                <Text style={styles.textButton}>{i18n.t("submit")}</Text>
-              </TouchableOpacity>
-
+            <TouchableOpacity
+              ref={ref => {
+                this.button = ref;
+              }}
+              onPress={() => this.submit()}
+              style={styles.button}
+            >
+              <Text style={styles.textButton}>{i18n.t("submit")}</Text>
+            </TouchableOpacity>
           </View>
         </View>
         {/* <Back onPress={() => this.back()} title={i18n.t("profile")}/>

@@ -6,7 +6,7 @@
     "privacy": "public",
     "sdkVersion": "35.0.0",
     "platforms": ["ios", "android", "web"],
-    "version": "2.0.1",
+    "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -31,7 +31,6 @@
       "package": "com.egy.winwin",
       "versionCode": 33
     },
-
     "description": "this app for offers"
   }
 }

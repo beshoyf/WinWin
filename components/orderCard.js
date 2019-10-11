@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { View, Image, Text, TouchableOpacity, Dimensions } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import colors from "../constants/colors";
-import Swipeable from 'react-native-gesture-handler/Swipeable';
-import { GestureHandler } from 'expo';
-import Swipeout from 'react-native-swipeout';
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import { GestureHandler } from "expo";
+import Swipeout from "react-native-swipeout";
 
 const { width, height } = Dimensions.get("window");
 import {
@@ -21,13 +21,15 @@ export default class HelloWorldApp extends Component {
 
   render() {
     var swipeoutBtns = [
-  {
-    text: 'Delete',
-    backgroundColor: 'red',
-    underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
-    onPress: () => { this.props.onPress() }
-  }
-]
+      {
+        text: "Delete",
+        backgroundColor: "red",
+        underlayColor: "rgba(0, 0, 0, 1, 0.6)",
+        onPress: () => {
+          this.props.onPress();
+        }
+      }
+    ];
     const {
       img,
       orderDesc,
@@ -39,7 +41,6 @@ export default class HelloWorldApp extends Component {
       onPress
     } = this.props;
     return (
-
       <View
         style={{
           flex: 1,
@@ -47,7 +48,6 @@ export default class HelloWorldApp extends Component {
           backgroundColor: colors.white,
           marginHorizontal: 10,
           overflow: "hidden",
-          padding: 10,
           borderRadius: 10,
           marginTop: 20,
           borderWidth: 0.3,
@@ -61,136 +61,131 @@ export default class HelloWorldApp extends Component {
           elevation: 5
         }}
       >
-      <Swipeout right={swipeoutBtns}>
-
-
-        <Collapse>
-
-          <CollapseHeader>
+        <Swipeout right={swipeoutBtns}>
+          <View>
             <View>
-              <View
-                style={{ flex: 1, flexDirection: "row", alignItems: "center" }}
-              >
-                <Image
-                  source={{ uri: img }}
-                  style={{
-                    height: 100,
-                    width: 100,
-                    marginVertical: 10,
-                    marginHorizontal: 10
-                  }}
-                  resizeMode="stretch"
-                />
+              <View>
                 <View
                   style={{
                     flex: 1,
-                    paddingLeft: 10,
-                    marginVertical: 2
+                    flexDirection: "row",
+                    alignItems: "center",
+                    padding: 10,
+                    backgroundColor: "white",
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 2
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                    elevation: 5
                   }}
                 >
+                  <Image
+                    source={{ uri: img }}
+                    style={{
+                      height: 100,
+                      width: 100,
+                      marginVertical: 10,
+                      marginHorizontal: 10
+                    }}
+                    resizeMode="stretch"
+                  />
                   <View
                     style={{
                       flex: 1,
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
+                      paddingLeft: 10,
                       marginVertical: 2
                     }}
                   >
-                    <Text
-                      style={{ marginLeft: 2, flex: 1, textAlign: "center" }}
-                    >
-                      {brandName}
-                    </Text>
-                    {date == null ? null : (
-                      <Text
-                        style={{ flex: 1 }}
-                        numberOfLines={1}
-                        ellipsizeMode="tail"
-                      >
-                        {date}
-                      </Text>
-                    )}
-                  </View>
-                  <View
-                    style={{
-                      marginVertical: 5,
-                      width: width * 0.5,
-                      backgroundColor: colors.orange,
-                      paddingVertical: 3,
-                      borderRadius: 10,
-                      alignSelf: "center"
-                    }}
-                  >
-                    <Text
+                    <View
                       style={{
-                        marginVertical: 5,
-                        textAlign: "center",
-                        fontWeight: "bold",
-                        fontSize: 13,
-                        color: colors.white
+                        flex: 1,
+                        flexDirection: "row",
+
+                        marginVertical: 2
                       }}
                     >
-                      {orderDesc}
-                    </Text>
+                      <Text style={{ flex: 1, fontWeight: "bold" }}>
+                        {brandName}
+                      </Text>
+                    </View>
+                    {date == null ? null : (
+                      <View style={{ flexDirection: "row" }}>
+                        <Text>Date : </Text>
+                        <Text
+                          style={{ flex: 1, color: colors.Grey }}
+                          numberOfLines={1}
+                          ellipsizeMode="tail"
+                        >
+                          {date}
+                        </Text>
+                      </View>
+                    )}
+                    {date == null ? (
+                      <View></View>
+                    ) : (
+                      <View style={{ marginTop: 5 }}>
+                        <View style={{ flex: 1 }}>
+                          <View
+                            style={{
+                              flex: 1,
+                              flexDirection: "row",
+                              justifyContent: "space-between"
+                            }}
+                          >
+                            <Text>Location : </Text>
+                            <Text
+                              style={{ flex: 1, color: colors.Grey }}
+                              numberOfLines={1}
+                              ellipsizeMode="tail"
+                            >
+                              {branchName}
+                            </Text>
+                          </View>
+                          <View
+                            style={{
+                              flexDirection: "row",
+                              justifyContent: "space-between"
+                            }}
+                          >
+                            <Text>Quantity:</Text>
+                            <Text style={{ color: colors.Grey }}>
+                              {orderQuantity}
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    )}
+                    <View
+                      style={{
+                        marginVertical: 5,
+                        width: width * 0.5,
+                        backgroundColor: colors.orange,
+                        paddingVertical: 3,
+                        borderRadius: 10,
+                        alignSelf: "center"
+                      }}
+                    >
+                      <Text
+                        style={{
+                          marginVertical: 5,
+                          textAlign: "center",
+                          fontWeight: "bold",
+                          fontSize: 13,
+                          color: colors.white
+                        }}
+                      >
+                        {orderDesc}
+                      </Text>
+                    </View>
                   </View>
                 </View>
               </View>
             </View>
-          </CollapseHeader>
-          {date == null ? (
-            <View></View>
-          ) : (
-            <CollapseBody style={{ marginTop: 5 }}>
-              <View style={{ flex: 1 }}>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginHorizontal: 20
-                  }}
-                >
-                  <Text>Branch Location:</Text>
-                  <Text
-                    style={{ flex: 1 }}
-                    numberOfLines={1}
-                    ellipsizeMode="tail"
-                  >
-                    {branchName}
-                  </Text>
-                </View>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginHorizontal: 20
-                  }}
-                >
-                  <Text>Quantity:</Text>
-                  <Text>{orderQuantity}</Text>
-                </View>
-                <TouchableOpacity
-                  onPress={onPress}
-                  style={{
-                    backgroundColor: colors.error,
-                    marginVertical: 10,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 7,
-                    marginHorizontal: 20,
-                    paddingVertical: 10
-                  }}
-                >
-                  <Text style={{ color: colors.white }}>CANCEL ORDER</Text>
-                </TouchableOpacity>
-              </View>
-            </CollapseBody>
-          )}
-
-        </Collapse>
+          </View>
         </Swipeout>
-
       </View>
     );
   }

@@ -34,8 +34,8 @@ class HelloWorldApp extends Component {
   componentWillMount() {
     const { navigation } = this.props;
     const whereToGo = navigation.getParam("whereToGo", "NO-ID");
-  this.props.navigation.navigate(whereToGo);
-}
+    this.props.navigation.navigate(whereToGo);
+  }
 
   constructor(props) {
     super(props);
@@ -108,46 +108,45 @@ class HelloWorldApp extends Component {
     //     useNativeDriver: false
     //   },
     // ).start();
-// if(this.props.navigation.state.params !== undefined){
-  // this.props.navigation.navigate("Order");
-// }
+    // if(this.props.navigation.state.params !== undefined){
+    // this.props.navigation.navigate("Order");
+    // }
     console.log(this.props.user.language);
     i18n.locale = this.props.user.language;
 
     this.fetchOffers();
-    this.isActive();
-    AsyncStorage.getItem('data').then((data)=>{
-      if(data == undefined){
+    //this.isActive();
+    AsyncStorage.getItem("data").then(data => {
+      if (data == undefined) {
         // alert('yes')
-      }
-      else {
+      } else {
         this.setState({
           orderSatus: JSON.parse(data),
           isLoading: false
         });
       }
-    })
+    });
   }
-  isActive = () => {
-    fetch(`${api_url}/Users/IsActive?userid=${this.props.user.userid}`, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson);
-        this.setState({ isActive: responseJson });
-        console.log("is active" + isActive);
-        this.props.activateMethod({
-          ...this.props.user,
-          isActive: this.state.isActive
-        });
-      })
-      .catch(error => {});
-  };
+  // isActive = () => {
+  //   fetch(`${api_url}/Users/IsActive?userid=${this.props.user.userid}`, {
+  //     method: "GET",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     }
+  //   })
+  //     .then(response => response.json())
+  //     .then(responseJson => {
+  //       console.log(responseJson);
+  //       this.setState({ isActive: responseJson });
+  //       console.log("is active" + isActive);
+  //       this.props.activateMethod({
+  //         ...this.props.user,
+  //         isActive: this.state.isActive
+  //       });
+  //     })
+  //     .catch(error => {});
+  // };
   // fetchOffers = () => {
   //   this.setState({ isLoading: true });
   //   fetch(
@@ -192,7 +191,7 @@ class HelloWorldApp extends Component {
     )
       .then(response => response.json())
       .then(responseJson => {
-        AsyncStorage.setItem('data',JSON.stringify(responseJson));
+        AsyncStorage.setItem("data", JSON.stringify(responseJson));
         //  console.log(responseJson);
         this.setState({
           orderSatus: responseJson,
@@ -205,14 +204,11 @@ class HelloWorldApp extends Component {
         });
       });
   };
-  onShare =  (message) => {
-
-     Share.share({
-        message,
-        url:message
-      });
-
-
+  onShare = message => {
+    Share.share({
+      message,
+      url: message
+    });
   };
   toggleFavorite = item => {
     var id = item.offerId;
@@ -252,7 +248,16 @@ class HelloWorldApp extends Component {
       }}
     >
       <Card
-        onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
+        onPressShare={() =>
+          this.onShare(
+            "winwin://offer/" +
+              item.offerId +
+              "/" +
+              item.categoryName +
+              "/" +
+              item.brandName
+          )
+        }
         pressHeart={() => this.toggleFavorite(item)}
         brandName={
           this.props.user.language == "en"
@@ -288,7 +293,7 @@ class HelloWorldApp extends Component {
 
   category = item => (
     <TouchableOpacity
-      style={{  }}
+      style={{}}
       onPress={() =>
         this.props.navigation.navigate("Categories", {
           catId: item.id,
@@ -296,19 +301,23 @@ class HelloWorldApp extends Component {
         })
       }
     >
-      <ImageBackground source={item.img} style={{
-        alignItems: "center",
-        justifyContent: "center",
-        margin: 5,
-        paddingHorizontal: 20,
-        paddingVertical: 40,
-        overflow: "hidden",
-        borderRadius: 10,
-
-      }}>
+      <ImageBackground
+        source={item.img}
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          margin: 5,
+          paddingHorizontal: 20,
+          paddingVertical: 40,
+          overflow: "hidden",
+          borderRadius: 10
+        }}
+      >
         <View style={styles.overlay} />
         <View style={styles.categoryIcon}>
-          <Animated.Text style={{...styles.categoryTxt}}>{i18n.t(item.title)}</Animated.Text>
+          <Animated.Text style={{ ...styles.categoryTxt }}>
+            {i18n.t(item.title)}
+          </Animated.Text>
         </View>
       </ImageBackground>
     </TouchableOpacity>
@@ -354,9 +363,9 @@ class HelloWorldApp extends Component {
   onRefresh() {
     this.setState({ isLoading: true }, this.fetchOffers());
   }
-  handleScroll = (e) => {
+  handleScroll = e => {
     console.log(e.nativeEvent.contentOffset.y);
-  }
+  };
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -384,7 +393,7 @@ class HelloWorldApp extends Component {
             />
           </View>
         </View>
-        <View style={{  }}>
+        <View style={{}}>
           <Text style={styles.text}>Category</Text>
           <FlatList
             showsHorizontalScrollIndicator={false}
@@ -430,7 +439,6 @@ class HelloWorldApp extends Component {
               onRefresh={() => this.onRefresh()}
               refreshing={this.state.isLoading}
               // onScroll={this.handleScroll}
-
 
               //onEndReached={() => this.newOffer()}
               ListEmptyComponent={

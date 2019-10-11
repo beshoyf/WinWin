@@ -7,9 +7,10 @@ import {
   PanResponder,
   Animated,
   TouchableOpacity,
-  Button
+  Button,
+  Dimensions
 } from "react-native";
-
+const { width, height } = Dimensions.get("window");
 const REACTIONS = [
   {
     label: "Don't like it",
@@ -81,6 +82,12 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <TouchableOpacity
+          onPress={this.props.submit}
+          style={{ alignSelf: "flex-end", padding: 10, marginBottom: 10 }}
+        >
+          <Text style={{ textAlign: "right", fontSize: 20 }}>X</Text>
+        </TouchableOpacity>
         <View style={styles.wrap}>
           <Text style={styles.welcome}>How much do you like our app?</Text>
 
@@ -210,11 +217,26 @@ export default class App extends React.Component {
             </Animated.View>
           </View>
         </View>
-        <Button
-          onPress={this.props.submit}
-          title="Submit"
-          style={{ marginTop: 40 }}
-        />
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-around",
+
+            width: width * 0.8
+          }}
+        >
+          <Button
+            onPress={this.props.submit}
+            title="Submit"
+            style={{ marginTop: 40, paddingHorizontal: 20 }}
+          />
+          <Button
+            onPress={this.props.submit}
+            title="Later"
+            style={{ marginTop: 40 }}
+            color="grey"
+          />
+        </View>
       </View>
     );
   }

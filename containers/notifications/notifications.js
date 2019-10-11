@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import styles from "./styles";
 import colors from "../../constants/colors";
+import ProgresiveImage from "../../components/ProgresiveImage";
 import Back from "../../components/back";
 import i18n from "../../utils/language";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
@@ -41,7 +42,7 @@ class HelloWorldApp extends Component {
     })
       .then(response => response.json())
       .then(responseJson => {
-        //  console.log(responseJson);
+        console.log(responseJson);
         this.setState({
           orderSatus: responseJson,
           isLoading: false
@@ -70,11 +71,12 @@ class HelloWorldApp extends Component {
       }
       style={styles.largCard}
     >
-      <Image
+      <ProgresiveImage
+        thumbnailSource={{ uri: item.subNails }}
         source={{ uri: item.image }}
-        resizeMode="contain"
         style={styles.img}
       />
+
       <View style={styles.rightView}>
         <Text style={styles.headText}>
           {this.props.user.language == "en"

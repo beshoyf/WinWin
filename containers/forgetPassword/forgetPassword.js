@@ -56,7 +56,7 @@ export default class HelloWorldApp extends Component {
           style={{
             flex: 0.6,
             backgroundColor: "#2e6cff",
-            borderBottomLeftRadius: 100,
+            borderBottomLeftRadius: 100
           }}
         >
           <TouchableOpacity
@@ -64,12 +64,12 @@ export default class HelloWorldApp extends Component {
             style={{
               flex: 0.1,
               height: 30,
-              width: 30,
+              width: 35,
               backgroundColor: "white",
               borderRadius: 50,
               alignItems: "center",
               justifyContent: "center",
-              paddingVertical: 2,
+              paddingVertical: 7,
               shadowColor: "#000",
               shadowOffset: {
                 width: 0,
@@ -77,9 +77,9 @@ export default class HelloWorldApp extends Component {
               },
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
-              left: 10,
-              top: 60,
-              elevation: 5
+              elevation: 5,
+              marginTop: 60,
+              marginHorizontal: 10
             }}
           >
             <Ionicons
@@ -99,14 +99,14 @@ export default class HelloWorldApp extends Component {
           >
             <Image
               source={require("../../assets/win.png")}
-              style={{ width: 105, height: 80 }}
+              style={{ width: 150, height: 150, bottom: 20 }}
               resizeMode="contain"
             />
           </View>
         </View>
-        <View style={{ flex: 1, justifyContent: "center" }}>
+        <View style={{ flex: 1 }}>
           <TextInput
-            style={styles.textinpute}
+            style={[styles.textinpute, { marginTop: 20 }]}
             placeholder={i18n.t("email")}
             autoCapitalize="none"
             placeholderTextColor={colors.Grey}
