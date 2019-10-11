@@ -205,10 +205,17 @@ class HelloWorldApp extends Component {
       });
   };
   onShare = message => {
+    if(Platform.OS == 'android'){
+      Share.share({
+        message:encodeURI(message),
+        url: message
+      });
+    }
+    else {
     Share.share({
-      message,
-      url: message
+    url: message
     });
+
   };
   toggleFavorite = item => {
     var id = item.offerId;
