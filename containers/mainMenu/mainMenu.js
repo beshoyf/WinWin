@@ -204,7 +204,7 @@ class HelloWorldApp extends Component {
         });
       });
   };
-  onShare = message => {
+  onShare =message => {
     if(Platform.OS == 'android'){
       Share.share({
         message:encodeURI(message),
@@ -212,11 +212,13 @@ class HelloWorldApp extends Component {
       });
     }
     else {
+
     Share.share({
     url: message
     });
 
   };
+}
   toggleFavorite = item => {
     var id = item.offerId;
     fetch(

@@ -95,6 +95,7 @@ class HelloWorldApp extends Component {
     });
 
   };
+}
 
   toggleFavorite = item => {
     var id = item.offerId;
