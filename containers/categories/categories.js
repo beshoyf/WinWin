@@ -77,7 +77,7 @@ class HelloWorldApp extends Component {
       url: `${api_url}/Brands/GetBrandsForCat?catId=${this.state.id}`
     })
       .then(res => {
-        //console.log(res);
+        console.log(res);
         this.setState({
           ...this.state,
           orderSatus: res.data,

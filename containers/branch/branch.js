@@ -17,7 +17,8 @@ import Card from "../../components/card";
 import Server from "../../constants/server";
 const { api_url } = Server;
 import Constants from "expo-constants";
-export default class HelloWorldApp extends Component {
+import { connect } from "react-redux";
+class HelloWorldApp extends Component {
   constructor(props) {
     super(props);
 
@@ -100,9 +101,17 @@ export default class HelloWorldApp extends Component {
       }}
     >
       <Card
-      onPressShare = {()=>this.onShare('winwin://offer/'+item.offerId+'/'+item.categoryName+'/'+item.brandName)}
-      pressHeart={() => this.toggleFavorite(item)}
-
+        onPressShare={() =>
+          this.onShare(
+            "winwin://offer/" +
+              item.offerId +
+              "/" +
+              item.categoryName +
+              "/" +
+              item.brandName
+          )
+        }
+        pressHeart={() => this.toggleFavorite(item)}
         brandName={item.brandName}
         category={item.categoryName}
         urlImageSmall={item.brandIcon}
@@ -145,3 +154,10 @@ export default class HelloWorldApp extends Component {
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+export default connect(mapStateToProps)(HelloWorldApp);

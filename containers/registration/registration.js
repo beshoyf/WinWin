@@ -8,7 +8,9 @@ import {
   ImageBackground,
   ActivityIndicator,
   Dimensions,
-  Button
+  Button,
+  KeyboardAvoidingView,
+  ScrollView
 } from "react-native";
 import DateTimePicker from "react-native-modal-datetime-picker";
 const { width, height } = Dimensions.get("window");
@@ -146,15 +148,20 @@ class HelloWorldApp extends Component {
             backgroundColor: "#f1f0ee"
           }}
         />
-        <View
+        <ScrollView
           style={{
             flex: 1,
             marginVertical: 20,
-            justifyContent: "space-between"
+            paddingTop: 5
           }}
         >
           <TextInput
-            style={styles.textinpute}
+            style={[
+              styles.textinpute,
+              {
+                textAlign: i18n.locale == "ar" ? "right" : null
+              }
+            ]}
             placeholder={i18n.t("username")}
             autoCapitalize="none"
             placeholderTextColor={colors.Grey}
@@ -175,7 +182,12 @@ class HelloWorldApp extends Component {
           </View>
 
           <TextInput
-            style={styles.textinpute}
+            style={[
+              styles.textinpute,
+              {
+                textAlign: i18n.locale == "ar" ? "right" : null
+              }
+            ]}
             placeholder={i18n.t("email")}
             autoCapitalize="none"
             placeholderTextColor={colors.Grey}
@@ -209,7 +221,8 @@ class HelloWorldApp extends Component {
                   style={{
                     marginTop: width * 0.04,
                     color: colors.Grey,
-                    marginHorizontal: 10
+                    marginHorizontal: 10,
+                    textAlign: i18n.locale == "ar" ? "right" : null
                   }}
                 >
                   {i18n.t("birthday")}
@@ -245,7 +258,12 @@ class HelloWorldApp extends Component {
             }}
           ></View>
           <TextInput
-            style={styles.textinpute}
+            style={[
+              styles.textinpute,
+              {
+                textAlign: i18n.locale == "ar" ? "right" : null
+              }
+            ]}
             placeholder={i18n.t("phone")}
             autoCapitalize="none"
             placeholderTextColor={colors.Grey}
@@ -319,7 +337,7 @@ class HelloWorldApp extends Component {
               <Text style={styles.wrong}>{this.state.rePasswordWrong}</Text>
             ) : null}
           </View>
-        </View>
+        </ScrollView>
         <View
           style={{
             flex: 0.4,

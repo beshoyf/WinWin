@@ -183,7 +183,12 @@ class HelloWorldApp extends Component {
         <View style={{ flex: 1 }}>
           <View style={{ flex: 1, justifyContent: "center" }}>
             <TextInput
-              style={styles.textinpute}
+              style={[
+                styles.textinpute,
+                {
+                  textAlign: i18n.locale == "ar" ? "right" : null
+                }
+              ]}
               placeholder={i18n.t("username")}
               autoCapitalize="none"
               placeholderTextColor={colors.Grey}

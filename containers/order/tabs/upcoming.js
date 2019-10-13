@@ -62,8 +62,9 @@ class HelloWorldApp extends Component {
   );
   componentWillMount() {
     this.didFocusSubscription = this.props.navigation.addListener(
-      "didFocus",
+      "didBlur",
       () => {
+        console.log("object");
         this.setState({ isLoading: true }, this.renderUpcoming());
       }
     );
