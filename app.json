@@ -5,7 +5,11 @@
     "slug": "winwin",
     "privacy": "public",
     "sdkVersion": "35.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "2.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -17,13 +21,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.egy.winwin",
       "infoPlist": {
-        "facebookAppId":"1120854974780852",
-        "FacebookDisplayName":"winwin",
+        "facebookAppId": "1120854974780852",
+        "FacebookDisplayName": "winwin",
         "NSLocationWhenInUseUsageDescription": "This app uses your current location to find nearby offers for you."
       }
     },

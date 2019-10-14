@@ -22,7 +22,7 @@ import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import axios from "axios";
 import { connect } from "react-redux";
-
+import ProgresiveImage from "../../components/ProgresiveImage";
 class HelloWorldApp extends Component {
   constructor(props) {
     super(props);
@@ -34,7 +34,7 @@ class HelloWorldApp extends Component {
       searchText: "",
       orderSatus: [],
       nameofCat: [],
-      map: true,
+      map: false,
       currentLong: null,
       currentlat: null,
 
@@ -129,7 +129,12 @@ class HelloWorldApp extends Component {
         { width: this.state.map ? width * 0.8 : width * 0.9 }
       ]}
     >
-      <Image source={{ uri: item.icon }} style={styles.img} />
+      <ProgresiveImage
+        thumbnailSource={{ uri: item.subNails }}
+        source={{ uri: item.icon }}
+        style={styles.img}
+      />
+      {/* <Image source={{ uri: item.icon }} style={styles.img} /> */}
       <View style={styles.rightView}>
         <Text style={styles.headText}>
           {this.props.user.language == "en"

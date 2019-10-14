@@ -5,7 +5,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  Linking
 } from "react-native";
 import styles from "./styles";
 import colors from "../../constants/colors";
@@ -26,7 +27,10 @@ class HelloWorldApp extends Component {
       reactive: false
     };
   }
-
+  _pressCall = () => {
+    const url = "tel:01141313114";
+    Linking.openURL(url);
+  };
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -101,10 +105,7 @@ class HelloWorldApp extends Component {
               <Text style={styles.rightText}>{this.state.savingMoney} EGP</Text>
             </View> */}
           </View>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("MainMenu")}
-            style={styles.button}
-          >
+          <TouchableOpacity onPress={this._pressCall} style={styles.button}>
             <Text style={styles.textButton}>MAKE ORDER NOW</Text>
           </TouchableOpacity>
           {this.props.user.isActive ? (

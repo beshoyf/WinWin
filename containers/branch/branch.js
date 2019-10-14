@@ -112,11 +112,23 @@ class HelloWorldApp extends Component {
           )
         }
         pressHeart={() => this.toggleFavorite(item)}
-        brandName={item.brandName}
+        brandName={
+          this.props.user.language == "en"
+            ? item.brandName
+            : item.brandAName == null
+            ? item.brandName
+            : item.brandAName
+        }
         category={item.categoryName}
         urlImageSmall={item.brandIcon}
         urlImageLarg={item.image}
-        title={item.title}
+        title={
+          this.props.user.language == "en"
+            ? item.title
+            : item.aTitle == null
+            ? item.title
+            : item.aTitle
+        }
         onPress={() =>
           this.props.navigation.navigate("Brand", { brandId: item.brandId })
         }
