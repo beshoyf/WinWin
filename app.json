@@ -10,7 +10,7 @@
       "android",
       "web"
     ],
-    "version": "2.0.2",
+    "version": "2.0.8",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -24,13 +24,22 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "facebookScheme": "fb1120854974780852",
+    "facebookAppId": "1120854974780852",
+    "facebookDisplayName": "winwin",
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.egy.winwin",
       "infoPlist": {
         "facebookAppId": "1120854974780852",
         "FacebookDisplayName": "winwin",
-        "NSLocationWhenInUseUsageDescription": "This app uses your current location to find nearby offers for you."
+        "NSLocationWhenInUseUsageDescription": "This app uses your current location to connect you with nearby offers / stores.",
+        "LSApplicationQueriesSchemes": [
+          "fbapi",
+          "fb-messenger-share-api",
+          "fbauth2",
+          "fbshareextension"
+        ]
       }
     },
     "android": {
